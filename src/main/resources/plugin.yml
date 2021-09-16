@@ -1,0 +1,12 @@
+name: PremiumPunishments
+version: ${project.version}
+main: com.exortions.premiumpunishments.PremiumPunishments
+api-version: 1.16
+prefix: PP
+authors: [ Exortions ]
+description: A lightweight, easy to use plugin that allows you to manage punishments on your Minecraft server.
+commands:
+  premiumpunishments:
+    description: Main command for PremiumPunishments.
+    aliases:
+      - pp

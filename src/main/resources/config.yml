@@ -1,0 +1,30 @@
+database:
+  database: "premiumpunishments"
+  host: "localhost"
+  port: "3306"
+
+  username: "root"
+  password: "beer"
+
+messages:
+  punishments:
+    ban-message: "&cYou are temporarily banned from this server for &f%time%&c!\n\n&7Reason: &f%reason%\n&7Banned by: &f%admin%\n&7Ban ID: &f%id%"
+    perm-ban-message: "&cYou are permanently banned from this server!\n\n&7Reason: &f%reason%\n&7Banned by: &f%admin%\n&7Ban ID: &f%id%"
+
+    mute-message: "&cYou are temporarily muted on this server for &f%time%&c!\n\n&7Reason: &f%reason%\n&7Muted by: &f%admin%\n\n&7Mute ID: &f%id%"
+    perm-mute-message: "&cYou are permanently muted on this server!\n\n&7Reason: &f%reason%\n&7Muted by: &f%admin%\n&7Mute ID: &f%id%"
+
+    kick-message: "&cYou have been kicked from this server!\n\n&7Reason: &f%reason%\n&7Kicked by: &f%admin%"
+    warn-message: "&cYou have been warned by &f%admin%&c for &f%reason%"
+  commands:
+    # Invoked when a console or command block runs command that requires a player.
+    only-players: "%prefix%&cOnly players can execute this command!"
+    # Invoked when the executor does not have permission to execute the command.
+    no-permission: "&cYou don't have permission to execute this command!"
+    # Invoked when a command is not found.
+    unknown-command: "%prefix%&cCommand not found! Use /premiumpunishments help for more info."
+
+settings:
+  commands:
+    ban:
+      ip-ban: true
