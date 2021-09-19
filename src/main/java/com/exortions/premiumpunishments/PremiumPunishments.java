@@ -8,6 +8,7 @@ import com.exortions.pluginutils.plugin.MinecraftVersion;
 import com.exortions.pluginutils.plugin.SpigotPlugin;
 import com.exortions.premiumpunishments.handlers.CommandHandler;
 import com.exortions.premiumpunishments.handlers.TabCompleteHandler;
+import com.exortions.premiumpunishments.listeners.FreezeListener;
 import com.exortions.premiumpunishments.listeners.PlayerChatListener;
 import com.exortions.premiumpunishments.listeners.PlayerJoinListener;
 import com.exortions.premiumpunishments.objects.settings.Settings;
@@ -19,11 +20,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 @SuppressWarnings({"UnusedAssignment", "ConstantConditions"})
 public final class PremiumPunishments extends SpigotPlugin {
@@ -44,20 +44,14 @@ public final class PremiumPunishments extends SpigotPlugin {
     @Getter
     private HashMap<String, String> databaseInformation;
 
-    private int ms;
+    public static HashMap<UUID, BukkitTask> frozenPlayers;
+
+    private long ms;
 
     @Override
     public void onEnable() {
         boolean loaded = false;
-        ms = 0;
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                ms++;
-            }
-        };
-        timer.scheduleAtFixedRate(task, 1, 1);
+        ms = System.currentTimeMillis();
 
         plugin = this;
 
@@ -73,8 +67,7 @@ public final class PremiumPunishments extends SpigotPlugin {
         if (!loadMetrics()) return; else loaded = true;
 
         while (loaded) {
-            task.cancel();
-            sendMessage(getPrefix() + "Successfully enabled PremiumPunishments v" + getPluginVersion() + " in " + ms + "ms.");
+            sendMessage(getPrefix() + "Successfully enabled PremiumPunishments v" + getPluginVersion() + " in " + (System.currentTimeMillis() - ms) + "ms.");
             loaded = false;
         }
     }
@@ -85,6 +78,7 @@ public final class PremiumPunishments extends SpigotPlugin {
 
         Bukkit.getPluginManager().registerEvents(new PlayerChatListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
     }
 
     @Override
@@ -107,7 +101,22 @@ public final class PremiumPunishments extends SpigotPlugin {
 
         configuration = new Configuration(this, "config.yml");
 
-        new Settings(configuration.getBoolean("settings.commands.ban.ip-ban"));
+        new Settings(
+                configuration.getBoolean("settings.commands.ban.ip-ban"),
+                configuration.getBoolean("settings.commands.freeze.disable-movement"),
+                configuration.getBoolean("settings.commands.freeze.disable-interactions"),
+                configuration.getBoolean("settings.commands.freeze.disable-chatting"),
+                configuration.getStringList("settings.commands.freeze.disabled-commands"),
+                configuration.getBoolean("settings.commands.freeze.spam-message"),
+                configuration.getInt("settings.commands.freeze.spam-message-delay"));
+
+        sendMessage(getPrefix() + "Settings:");
+        sendMessage(getPrefix() + " - Ban IP addresses: " + Settings.BAN_IP_ADDRESSES);
+        sendMessage(getPrefix());
+        sendMessage(getPrefix() + " - Disable movement (Freeze): " + Settings.FREEZE_DISABLE_MOVEMENT);
+        sendMessage(getPrefix() + " - Disable interactions (Freeze): " + Settings.FREEZE_DISABLE_INTERACTIONS);
+        sendMessage(getPrefix() + " - Disable chatting (Freeze): " + Settings.FREEZE_DISABLE_CHATTING);
+        sendMessage(getPrefix() + " - Disabled commands (Freeze): " + Collections.singletonList(Settings.FREEZE_DISABLED_COMMANDS));
 
         return true;
     }
@@ -125,9 +134,13 @@ public final class PremiumPunishments extends SpigotPlugin {
         messages.put("kick-message", ChatUtils.colorize(configuration.getString("messages.punishments.kick-message")));
         messages.put("warn-message", ChatUtils.colorize(configuration.getString("messages.punishments.warn-message")));
 
+        messages.put("freeze-message", ChatUtils.colorize(configuration.getString("messages.punishments.freeze-message")));
+
         messages.put("only-players", ChatUtils.colorize(configuration.getString("messages.commands.only-players").replaceAll("%prefix%", getPrefix())));
         messages.put("no-permission", ChatUtils.colorize(configuration.getString("messages.commands.no-permission").replaceAll("%prefix%", getPrefix())));
         messages.put("unknown-command", ChatUtils.colorize(configuration.getString("messages.commands.unknown-command").replaceAll("%prefix%", getPrefix())));
+
+        messages.put("unknown-player", ChatUtils.colorize(configuration.getString("messages.commands.unknown-player").replaceAll("%prefix%", getPrefix())));
 
         return true;
     }
@@ -166,9 +179,13 @@ public final class PremiumPunishments extends SpigotPlugin {
     private boolean loadData() {
         sendMessage(getPrefix() + "Performing initial data load...");
 
+        frozenPlayers = new HashMap<>();
+
+        database.createFrozenPlayersTable();
         database.createBannedIpsTable();
         database.createPlayersTable();
         database.createMutesTable();
+        database.createNotesTable();
         database.createBansTable();
 
         return true;
@@ -191,18 +208,9 @@ public final class PremiumPunishments extends SpigotPlugin {
 
     @Override
     public void onDisable() {
-        ms = 0;
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                ms++;
-            }
-        };
-        timer.scheduleAtFixedRate(task, 1, 1);
+        ms = System.currentTimeMillis();
 
-        task.cancel();
-        sendMessage(getPrefix() + "Successfully disabled PremiumPunishments v" + getPluginVersion() + " in " + ms + "ms.");
+        sendMessage(getPrefix() + "Successfully disabled PremiumPunishments v" + getPluginVersion() + " in " + (System.currentTimeMillis() - ms) + "ms.");
     }
 
     public void reload() {

@@ -50,8 +50,22 @@ public class TabCompleteHandler implements TabCompleter {
                         for (Player player : Bukkit.getOnlinePlayers()) tab.add(player.getName());
                         break;
                     default:
-                        for (SubCommand subcommand : subcommands) if (subcommand.tabcompletion() != null) if (subcommand.name().equals(args[0])) tab.addAll(subcommand.tabcompletion()); else tab.add("");
+                        for (SubCommand subcommand : subcommands) if (subcommand.tabcompletion() != null) if (subcommand.name().equals(args[0])) tab.addAll(subcommand.tabcompletion()); else
+                            for (Player player : Bukkit.getOnlinePlayers()) {
+                                tab.add(player.getName());
+                            }
                         break;
+                }
+                break;
+            case 3:
+                if (args[0].equals("ban")) {
+                    if (args[2].isEmpty()) break;
+                    if (args[2].contains("s") || args[2].contains("m") || args[2].contains("h") || args[2].contains("d") || args[2].contains("y")) break;
+                    tab.add(args[2] + "s");
+                    tab.add(args[2] + "m");
+                    tab.add(args[2] + "h");
+                    tab.add(args[2] + "d");
+                    tab.add(args[2] + "y");
                 }
         }
         return tab;

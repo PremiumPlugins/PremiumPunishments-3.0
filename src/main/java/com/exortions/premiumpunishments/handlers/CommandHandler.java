@@ -5,8 +5,11 @@ import com.exortions.pluginutils.command.subcommand.SubCommandHandler;
 import com.exortions.premiumpunishments.PremiumPunishments;
 import com.exortions.premiumpunishments.commands.core.ban.BanCommand;
 import com.exortions.premiumpunishments.commands.core.ban.UnbanCommand;
+import com.exortions.premiumpunishments.commands.core.freeze.FreezeCommand;
+import com.exortions.premiumpunishments.commands.core.freeze.UnfreezeCommand;
 import com.exortions.premiumpunishments.commands.core.kick.KickCommand;
 import com.exortions.premiumpunishments.commands.core.mute.MuteCommand;
+import com.exortions.premiumpunishments.commands.core.notes.NoteCommand;
 import com.exortions.premiumpunishments.commands.core.warn.WarnCommand;
 import com.exortions.premiumpunishments.commands.miscellaneous.HelpCommand;
 import com.exortions.premiumpunishments.commands.miscellaneous.InfoCommand;
@@ -34,8 +37,11 @@ public class CommandHandler extends SubCommandHandler {
 
         List<SubCommand> subCommands = getSubcommands();
 
+        subCommands.add(new UnfreezeCommand());
+        subCommands.add(new FreezeCommand());
         subCommands.add(new ReloadCommand());
         subCommands.add(new UnbanCommand());
+        subCommands.add(new NoteCommand());
         subCommands.add(new KickCommand());
         subCommands.add(new WarnCommand());
         subCommands.add(new MuteCommand());

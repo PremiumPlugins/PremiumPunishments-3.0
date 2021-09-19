@@ -111,6 +111,44 @@ public class DatabaseHandler extends DatabaseManipulator {
         }
     }
 
+    public void createFrozenPlayersTable() {
+        sendMessage(getPrefix() + " - Creating table \"frozen_players\"");
+        try {
+            DatabaseMetaData  meta = getConnection().getMetaData();
+            ResultSet set = meta.getTables(null, null, "frozen_players", null);
+            if (set.next()) sendMessage(getPrefix() + " - Table \"frozen_players\" already exists!"); else {
+                sendMessage(getPrefix() + " - Table \"frozen_players\" does not exist, creating it now!");
+
+                String sql = "CREATE TABLE `" + getDatabase() + "`.`frozen_players` (" +
+                        "  `uuid` VARCHAR(100) NOT NULL)";
+
+                execute(sql);
+            }
+        } catch (SQLException e) {
+            sendMessage(getPrefix() + ChatColor.RED + " - An error occurred while trying to create table \"frozen_players\"");
+        }
+    }
+
+    public void createNotesTable() {
+        sendMessage(getPrefix() + " - Creating table \"notes\"");
+        try {
+            DatabaseMetaData  meta = getConnection().getMetaData();
+            ResultSet set = meta.getTables(null, null, "notes", null);
+            if (set.next()) sendMessage(getPrefix() + " - Table \"notes\" already exists!"); else {
+                sendMessage(getPrefix() + " - Table \"notes\" does not exist, creating it now!");
+
+                String sql = "CREATE TABLE `" + getDatabase() + "`.`notes` (" +
+                        "  `uuid` VARCHAR(100) NOT NULL," +
+                        "  `name` VARCHAR(100) NOT NULL," +
+                        "  `target` VARCHAR(100) NOT NULL)";
+
+                execute(sql);
+            }
+        } catch (SQLException e) {
+            sendMessage(getPrefix() + ChatColor.RED + " - An error occurred while trying to create table \"notes\"");
+        }
+    }
+
     public void insertNewPlayer(UUID uuid, String username) {
         String sql = "INSERT INTO" +
                 " `" + getDatabase() + "`.`players`(" +
@@ -207,6 +245,27 @@ public class DatabaseHandler extends DatabaseManipulator {
                 "'" + player.getUniqueId() + "'," +
                 "'" + Objects.requireNonNull(player.getAddress()).getHostName() + "'" +
                 ");";
+        execute(sql);
+    }
+
+    public void insertFrozenPlayer(Player player) {
+        String sql = "INSERT INTO `" + getDatabase() + "`.`frozen_players`" +
+                "(`uuid`)" +
+                "VALUES(" +
+                "'" + player.getUniqueId() + "');";
+        execute(sql);
+    }
+
+    public void insertNote(UUID uuid, String name, String target) {
+        String sql = "INSERT INTO `" + getDatabase() + "`.`notes`" +
+                "(`uuid`," +
+                "`name`," +
+                "`target`)" +
+                "VALUES(" +
+                "'" + uuid.toString() + "'," +
+                "'" + name + "'," +
+                "'" + target + "'" +
+                ")";
         execute(sql);
     }
 

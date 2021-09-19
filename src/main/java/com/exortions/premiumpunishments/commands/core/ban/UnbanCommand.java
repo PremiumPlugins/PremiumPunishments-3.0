@@ -1,7 +1,8 @@
 package com.exortions.premiumpunishments.commands.core.ban;
 
-import com.exortions.premiumpunishments.PremiumPunishments;
+import com.exortions.premiumpunishments.objects.command.Description;
 import com.exortions.premiumpunishments.objects.command.SubCommand;
+import com.exortions.premiumpunishments.objects.command.Usage;
 import com.exortions.premiumpunishments.objects.minecraftplayer.MinecraftPlayer;
 import com.exortions.premiumpunishments.objects.minecraftplayer.MinecraftPlayerRepository;
 import com.exortions.premiumpunishments.util.MojangAPI;
@@ -12,46 +13,13 @@ import org.bukkit.entity.Player;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+@Usage(usage = "<player>")
 @SuppressWarnings("ConstantConditions")
+@Description(description = "Unbans a player. Unbanning a player will revoke all ban punishments on them, and will allow them to join the server if they were banned before unbanning them.")
 public class UnbanCommand implements SubCommand {
-    @Override
-    public String name() {
-        return "unban";
-    }
-
-    @Override
-    public String permission() {
-        return "premiumpunishments.unban";
-    }
-
-    @Override
-    public String usage() {
-        return "/premiumpunishments unban <player>";
-    }
-
-    @Override
-    public String description() {
-        return "Unbans a specified player.";
-    }
-
-    @Override
-    public List<String> tabcompletion() {
-        return null;
-    }
-
-    @Override
-    public boolean requiresPlayer() {
-        return false;
-    }
-
-    @Override
-    public void execute(Player player, String[] args) {
-
-    }
 
     @Override
     public void execute(CommandSender sender, String[] args) {

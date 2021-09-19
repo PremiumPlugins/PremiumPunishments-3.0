@@ -4,7 +4,7 @@ database:
   port: "3306"
 
   username: "root"
-  password: "beer"
+  password: "password"
 
 messages:
   punishments:
@@ -16,6 +16,8 @@ messages:
 
     kick-message: "&cYou have been kicked from this server!\n\n&7Reason: &f%reason%\n&7Kicked by: &f%admin%"
     warn-message: "&cYou have been warned by &f%admin%&c for &f%reason%"
+
+    freeze-message: "&cYou have been frozen!\n&cJoin the teamspeak at &f<teamspeak>&c now!"
   commands:
     # Invoked when a console or command block runs command that requires a player.
     only-players: "%prefix%&cOnly players can execute this command!"
@@ -24,7 +26,20 @@ messages:
     # Invoked when a command is not found.
     unknown-command: "%prefix%&cCommand not found! Use /premiumpunishments help for more info."
 
+    unknown-player: "%prefix%&cCould not find player by the name of %s!"
+
 settings:
   commands:
     ban:
       ip-ban: true
+    freeze:
+      disable-movement: true
+
+      disable-interactions: true
+
+      disable-chatting: true
+      disabled-commands:
+        - "help"
+
+      spam-message: true
+      spam-message-delay: 10 # Every half a second

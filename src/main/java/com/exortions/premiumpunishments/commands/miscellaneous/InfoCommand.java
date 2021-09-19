@@ -1,49 +1,18 @@
 package com.exortions.premiumpunishments.commands.miscellaneous;
 
-import com.exortions.pluginutils.command.subcommand.SubCommand;
 import com.exortions.premiumpunishments.PremiumPunishments;
+import com.exortions.premiumpunishments.objects.command.Description;
+import com.exortions.premiumpunishments.objects.command.SubCommand;
+import com.exortions.premiumpunishments.objects.command.Usage;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.List;
 
+@Usage(usage = "info")
+@Description(description = "View all info about the PremiumPunishments plugin.")
 public class InfoCommand implements SubCommand {
-    @Override
-    public String name() {
-        return "info";
-    }
-
-    @Override
-    public String permission() {
-        return "premiumpunishments.info";
-    }
-
-    @Override
-    public String usage() {
-        return "/premiumpunishments info";
-    }
-
-    @Override
-    public String description() {
-        return "View all info about the PremiumPunishments plugin.";
-    }
-
-    @Override
-    public List<String> tabcompletion() {
-        return null;
-    }
-
-    @Override
-    public boolean requiresPlayer() {
-        return false;
-    }
-
-    @Override
-    public void execute(Player player, String[] args) {
-
-    }
-
     @Override
     public void execute(CommandSender sender, String[] args) {
         String prefix = PremiumPunishments.getPrefix();

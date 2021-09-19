@@ -1,7 +1,9 @@
 package com.exortions.premiumpunishments.commands.miscellaneous;
 
-import com.exortions.pluginutils.command.subcommand.SubCommand;
 import com.exortions.premiumpunishments.PremiumPunishments;
+import com.exortions.premiumpunishments.objects.command.Description;
+import com.exortions.premiumpunishments.objects.command.SubCommand;
+import com.exortions.premiumpunishments.objects.command.Usage;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -9,41 +11,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+@Usage(usage = "reload")
+@Description(description = "Reloads the Premium Punishments plugin.")
 public class ReloadCommand implements SubCommand {
-    @Override
-    public String name() {
-        return "reload";
-    }
-
-    @Override
-    public String permission() {
-        return "premiumpunishments.reload";
-    }
-
-    @Override
-    public String usage() {
-        return "/premiumpunishments reload";
-    }
-
-    @Override
-    public String description() {
-        return "Reloads the Premium Punishments plugin.";
-    }
-
-    @Override
-    public List<String> tabcompletion() {
-        return null;
-    }
-
-    @Override
-    public boolean requiresPlayer() {
-        return false;
-    }
-
-    @Override
-    public void execute(Player player, String[] args) {
-
-    }
 
     @Override
     public void execute(CommandSender sender, String[] args) {
@@ -55,6 +25,7 @@ public class ReloadCommand implements SubCommand {
                 ms[0]++;
             }
         };
+        timer.scheduleAtFixedRate(task, 1, 1);
 
         PremiumPunishments.getPlugin().reload();
 
