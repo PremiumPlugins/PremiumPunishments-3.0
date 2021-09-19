@@ -19,7 +19,6 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.sql.SQLException;
@@ -84,15 +83,17 @@ public final class PremiumPunishments extends SpigotPlugin {
     @Override
     public void registerCommands() {
         sendMessage(getPrefix() + "Registering commands...");
-        PluginCommand command = getCommand("premiumpunishments");
-        if (command == null) {
+
+        // Register main command
+        PluginCommand pp = getCommand("premiumpunishments");
+        if (pp == null) {
             sendMessage(getPrefix() + ChatColor.RED + " - Could not get main command /premiumpunishments registered with the server!");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
         commandHandler = new CommandHandler();
-        command.setExecutor(commandHandler);
-        command.setTabCompleter(new TabCompleteHandler());
+        pp.setExecutor(commandHandler);
+        pp.setTabCompleter(new TabCompleteHandler());
     }
 
     private boolean loadConfiguration() {
@@ -203,7 +204,7 @@ public final class PremiumPunishments extends SpigotPlugin {
         sendMessage(ChatColor.RED + "    __   " + ChatColor.GOLD + "__");
         sendMessage(ChatColor.RED + "   |__) " + ChatColor.GOLD +"|__)   " + ChatColor.RESET + "PremiumPunishments v" + getPluginVersion());
         sendMessage(ChatColor.RED + "   |    " + ChatColor.GOLD + "|      " + ChatColor.RESET + "Running on Bukkit - CraftBukkit");
-        sendMessage(ChatColor.RED + " ");
+        sendMessage(ChatColor.RED + "        ");
     }
 
     @Override

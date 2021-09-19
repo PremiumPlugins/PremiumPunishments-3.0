@@ -1,6 +1,7 @@
 package com.exortions.premiumpunishments.handlers;
 
 import com.exortions.pluginutils.command.subcommand.SubCommand;
+import com.exortions.premiumpunishments.PremiumPunishments;
 import com.exortions.premiumpunishments.objects.ban.Ban;
 import com.exortions.premiumpunishments.objects.ban.BanRepository;
 import org.bukkit.Bukkit;
@@ -12,7 +13,11 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.geom.RectangularShape;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,6 +54,11 @@ public class TabCompleteHandler implements TabCompleter {
                     case "kick":
                         for (Player player : Bukkit.getOnlinePlayers()) tab.add(player.getName());
                         break;
+                    case "note":
+                        tab.add("add");
+                        tab.add("list");
+                        tab.add("remove");
+                        break;
                     default:
                         for (SubCommand subcommand : subcommands) if (subcommand.tabcompletion() != null) if (subcommand.name().equals(args[0])) tab.addAll(subcommand.tabcompletion()); else
                             for (Player player : Bukkit.getOnlinePlayers()) {
@@ -66,6 +76,14 @@ public class TabCompleteHandler implements TabCompleter {
                     tab.add(args[2] + "h");
                     tab.add(args[2] + "d");
                     tab.add(args[2] + "y");
+                } else if (args[0].equals("note")) {
+                    if (args[1].equals("add")) {
+
+                    } else if (args[1].equals("list")) {
+
+                    } else if (args[1].equals("remove")) {
+                        
+                    }
                 }
         }
         return tab;

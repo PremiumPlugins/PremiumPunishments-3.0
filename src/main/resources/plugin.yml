@@ -4,8 +4,10 @@ main: com.exortions.premiumpunishments.PremiumPunishments
 api-version: 1.16
 prefix: PP
 author: Exortions
-description: A lightweight, easy to use plugin that allows you to manage punishments on your Minecraft server.
+description: A lightweight, easy to use plugin that allows you to manage punishments on your Minecraft server. From bans to warns, Premium Punishments is equip to handle anything that staff may need while moderating a server.
 database: true
+softdepend:
+  - StaffChat
 commands:
   premiumpunishments:
     description: Main command for the PremiumPunishments plugin.
