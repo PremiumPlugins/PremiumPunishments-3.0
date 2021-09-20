@@ -58,6 +58,7 @@ A lightweight, easy to use plugin that allows you to manage punishments on your 
 4. Optional staff-chat plugin that allows staff to converse privately.
 
 ### Commands
+
 * **Ban** - Ban a player with a custom duration and message. Banning a player will disconnect them from the server and display to them the custom message, as well as prevent them from re-connecting to the server until the duration has expired, or they have been manually unbanned.
 * **Unban** - Unbans a player. Unbanning a player will revoke all ban punishments on them, and will allow them to join the server if they were banned before unbanning them.
 * **Mute** - Mute a player with a custom duration. Muting a player prevents them from sending chat messages. The player will remain muted upon disconnecting and re-connecting to the server.
