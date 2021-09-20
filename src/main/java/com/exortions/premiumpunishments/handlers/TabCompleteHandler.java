@@ -68,7 +68,7 @@ public class TabCompleteHandler implements TabCompleter {
                 }
                 break;
             case 3:
-                if (args[0].equals("ban")) {
+                if (args[0].equals("ban") || args[0].equals("mute")) {
                     if (args[2].isEmpty()) break;
                     if (args[2].contains("s") || args[2].contains("m") || args[2].contains("h") || args[2].contains("d") || args[2].contains("y")) break;
                     tab.add(args[2] + "s");
