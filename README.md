@@ -122,7 +122,7 @@ Distributed under the Apache 2.0 License. See `LICENSE` for more information.
 [forks-url]: https://github.com/Exortions/PremiumPunishments-3.0/network/members
 [stars-shield]: https://img.shields.io/github/stars/Exortions/PremiumPunishments-3.0.svg?style=for-the-badge
 [stars-url]: https://github.com/Exortions/PremiumPunishments-3.0/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Exortions/PremiumPunishments-3.0?.svgstyle=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/Exortions/PremiumPunishments-3.0?.svg?style=for-the-badge
 [issues-url]: https://github.com/Exortions/PremiumPunishments-3.0/issues
 [license-shield]: https://img.shields.io/github/license/Exortions/PremiumPunishments-3.0.svg?style=for-the-badge
 [license-url]: https://github.com/Exortions/PremiumPunishments-3.0/blob/master/LICENSE
