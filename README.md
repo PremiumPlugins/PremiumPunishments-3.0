@@ -56,16 +56,14 @@ A lightweight, easy to use plugin that allows you to manage punishments on your 
 4. Optional staff-chat plugin that allows staff to converse privately.
 
 ### Commands
-<div align="center"><img src="images/commands.png" alt="Commands" width="595" height="242"></div>
-
-* /premiumpunishments ban - Ban a player with a custom duration and message. Banning a player will disconnect them from the server and display to them the custom message, as well as prevent them from re-connecting to the server until the duration has expired, or they have been manually unbanned.
-* /premiumpunishments unban - Unbans a player. Unbanning a player will revoke all ban punishments on them, and will allow them to join the server if they were banned before unbanning them.
-* /premiumpunishments mute - Mute a player with a custom duration. Muting a player prevents them from sending chat messages. The player will remain muted upon disconnecting and re-connecting to the server.
-* /premiumpunishments kick - Kick a player with a custom message. Kicking a player will disconnect them from the server and display to them the custom message.
-* /premiumpunishments warn - Warn a player with a custom message. Warning a player will send them the custom message as a formal warning.
-* /premiumpunishments freeze - Freeze a player with a custom duration. Freezing a player prevents them from moving, breaking blocks, placing blocks, interacting with the world, and running chat commands. The player will remain frozen upon disconnecting and re-connecting to the server.
-* /premiumpunishments unfreeze - Unfreeze a player. Unfreezing a player will allow the player to continue playing on the server like normal before they were frozen.
-* /premiumpunishments note - Notes allow staff to make notes on different players. They can remove, add, and list notes they have on a player.
+* **Ban** - Ban a player with a custom duration and message. Banning a player will disconnect them from the server and display to them the custom message, as well as prevent them from re-connecting to the server until the duration has expired, or they have been manually unbanned.
+* **Unban** - Unbans a player. Unbanning a player will revoke all ban punishments on them, and will allow them to join the server if they were banned before unbanning them.
+* **Mute** - Mute a player with a custom duration. Muting a player prevents them from sending chat messages. The player will remain muted upon disconnecting and re-connecting to the server.
+* **Kick** - Kick a player with a custom message. Kicking a player will disconnect them from the server and display to them the custom message.
+* **Warn** - Warn a player with a custom message. Warning a player will send them the custom message as a formal warning.
+* **Freeze** - Freeze a player with a custom duration. Freezing a player prevents them from moving, breaking blocks, placing blocks, interacting with the world, and running chat commands. The player will remain frozen upon disconnecting and re-connecting to the server.
+* **Unfreeze** - Unfreeze a player. Unfreezing a player will allow the player to continue playing on the server like normal before they were frozen.
+* **Note** - Notes allow staff to make notes on different players. They can remove, add, and list notes they have on a player.
 
 ### Built With
 
