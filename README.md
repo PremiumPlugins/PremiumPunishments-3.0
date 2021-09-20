@@ -116,13 +116,13 @@ Distributed under the Apache 2.0 License. See `LICENSE` for more information.
 * [README Template](https://github.com/othneildrew/Best-README-Template)
 * [Punishment for Inspiration](https://dev.bukkit.org/projects/punishment)
 
-[contributors-shield]: https://img.shields.io/github/contributors/Exortions/repo.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/Exortions/PremiumPunishments-3.0.svg?style=for-the-badge
 [contributors-url]: https://github.com/Exortions/PremiumPunishments-3.0/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Exortions/repo.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/Exortions/PremiumPunishments-3.0.svg?style=for-the-badge
 [forks-url]: https://github.com/Exortions/PremiumPunishments-3.0/network/members
-[stars-shield]: https://img.shields.io/github/stars/Exortions/repo.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/Exortions/PremiumPunishments-3.0.svg?style=for-the-badge
 [stars-url]: https://github.com/Exortions/PremiumPunishments-3.0/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Exortions/repo.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/Exortions/PremiumPunishments-3.0?.svgstyle=for-the-badge
 [issues-url]: https://github.com/Exortions/PremiumPunishments-3.0/issues
-[license-shield]: https://img.shields.io/github/license/Exortions/repo.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/Exortions/PremiumPunishments-3.0.svg?style=for-the-badge
 [license-url]: https://github.com/Exortions/PremiumPunishments-3.0/blob/master/LICENSE
