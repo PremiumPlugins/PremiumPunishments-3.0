@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @Usage(usage = "<player>")
 @SuppressWarnings("ConstantConditions")
-@Description(description = "Unbans a player. Unbanning a player will revoke all ban punishments on them, and will allow them to join the server if they were banned before unbanning them.")
+@Description(description = "Unban a player. Unbanning a player will revoke all ban punishments on them, and will allow them to join the server if they were banned before unbanning them.")
 public class UnbanCommand implements SubCommand {
 
     @Override

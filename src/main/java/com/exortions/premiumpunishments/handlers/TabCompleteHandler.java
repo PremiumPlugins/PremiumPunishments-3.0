@@ -78,11 +78,11 @@ public class TabCompleteHandler implements TabCompleter {
                     tab.add(args[2] + "y");
                 } else if (args[0].equals("note")) {
                     if (args[1].equals("add")) {
-
+                        break;
                     } else if (args[1].equals("list")) {
-
+                        break;
                     } else if (args[1].equals("remove")) {
-                        
+                        break;
                     }
                 }
         }
