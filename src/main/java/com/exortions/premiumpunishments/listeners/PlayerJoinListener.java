@@ -34,7 +34,6 @@ public class PlayerJoinListener implements Listener {
                 if (ips.getString("ip").equals(player.getAddress().getHostName())) {
                     if (!p.getBanned()) {
                         Ban ban = BanRepository.getBanByUuid(ips.getString("uuid"));
-                        System.out.println("premiumpunishments ban " + player.getName() + " -1 " + ban.getReason());
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "premiumpunishments ban " + player.getName() + " -1 " + ban.getReason());
                     }
                 }
