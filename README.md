@@ -1,30 +1,26 @@
 [<h1  align="center">![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url] [![Apache 2.0 License][license-shield]][license-url]</h1>
 
-<!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/Exortions/PremiumPunishments-3.0">
     <img src="images/banner.png" alt="Banner" width="595" height="242">
   </a>
+</p>
 
 <h3 align="center">Premium Punishments</h3>
-
-  <p align="center">
+<p align="center">
     A lightweight, easy to use plugin that allows you to manage punishments on your Minecraft server. From bans to warns, Premium Punishments is equip to handle anything that staff may need while moderating a server.
     <br />
-    <a href="https://github.com/Exortions/PremiumPunishments-3.0"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Exortions/PremiumPunishments-3.0"><strong>Explore the project »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Exortions/PremiumPunishments-3.0">View Demo</a>
+    <a href="https://github.com/Exortions/PremiumPunishments-3.0">View Spigot</a>
     ·
     <a href="https://github.com/Exortions/PremiumPunishments-3.0/issues">Report Bug</a>
     ·
     <a href="https://github.com/Exortions/PremiumPunishments-3.0/issues">Request Feature</a>
-  </p>
+</p>
 
-
-
-<!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
@@ -48,15 +44,27 @@
   </ol>
 </details>
 
-
-
-<!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 A lightweight, easy to use plugin that allows you to manage punishments on your Minecraft server. From bans to warns, Premium Punishments is equip to handle anything that staff may need while moderating a server.
 
+### Features
+
+1. Fully customizable configuration file
+2. Lightweight architecture that allows the server to run smoothly along with Premium Punishments
+3. Built-in MySQL support that allows the server to make use of databases.
+4. Optional staff-chat plugin that allows staff to converse privately.
+
+### Commands
+
+* /premiumpunishments ban - Ban a player with a custom duration and message. Banning a player will disconnect them from the server and display to them the custom message, as well as prevent them from re-connecting to the server until the duration has expired, or they have been manually unbanned.
+* /premiumpunishments unban - Unbans a player. Unbanning a player will revoke all ban punishments on them, and will allow them to join the server if they were banned before unbanning them.
+* /premiumpunishments mute - Mute a player with a custom duration. Muting a player prevents them from sending chat messages. The player will remain muted upon disconnecting and re-connecting to the server.
+* /premiumpunishments kick - Kick a player with a custom message. Kicking a player will disconnect them from the server and display to them the custom message.
+* /premiumpunishments warn - Warn a player with a custom message. Warning a player will send them the custom message as a formal warning.
+* /premiumpunishments freeze - Freeze a player with a custom duration. Freezing a player prevents them from moving, breaking blocks, placing blocks, interacting with the world, and running chat commands. The player will remain frozen upon disconnecting and re-connecting to the server.
+* /premiumpunishments unfreeze - Unfreeze a player. Unfreezing a player will allow the player to continue playing on the server like normal before they were frozen.
+* /premiumpunishments note - Notes allow staff to make notes on different players. They can remove, add, and list notes they have on a player.
 
 ### Built With
 
@@ -64,9 +72,6 @@ A lightweight, easy to use plugin that allows you to manage punishments on your 
 * [Plugin Utils](https://www.github.com/Exortions/PluginUtils)
 * [Maven](https://maven.apache.org/)
 
-
-
-<!-- GETTING STARTED -->
 ## Getting Started
 
 To add Premium Punishments to your Minecraft server, follow these simple steps.
@@ -84,12 +89,10 @@ To add Premium Punishments to your Minecraft server, follow these simple steps.
    spigot page.
 2. Drag and drop the jar file into your Minecraft server's plugins directory.
 
-<!-- ROADMAP -->
 ## Roadmap
 
 See the [open issues](https://github.com/Exortions/PremiumPunishments-3.0/issues) for a list of proposed features (and known issues).
 
-<!-- CONTRIBUTING -->
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -100,20 +103,17 @@ Contributions are what make the open source community such an amazing place to l
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
-
-<!-- LICENSE -->
 ## License
 
 Distributed under the Apache 2.0 License. See `LICENSE` for more information.
 
-<!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
 * [Spigot API](https://www.spigotmc.org/)
 * [Plugin Utils](https://www.github.com/Exortions/PluginUtils)
 * [Maven](https://maven.apache.org/)
 * [README Template](https://github.com/othneildrew/Best-README-Template)
+* [Punishment for Inspiration](https://dev.bukkit.org/projects/punishment)
 
 [contributors-shield]: https://img.shields.io/github/contributors/Exortions/repo.svg?style=for-the-badge
 [contributors-url]: https://github.com/Exortions/PremiumPunishments-3.0/graphs/contributors

@@ -21,7 +21,7 @@ import java.util.List;
 
 @SuppressWarnings("ConstantConditions")
 @Usage(usage = "<player> <time> <reason>")
-@Description(description = "Ban a player with a custom duration and message. Banning a player will disconnect them from the server and display to them the custom message, as well as prevent them from re-connecting to the server until the duration has expired or they have been manually unbanned.")
+@Description(description = "Ban a player with a custom duration and message. Banning a player will disconnect them from the server and display to them the custom message, as well as prevent them from re-connecting to the server until the duration has expired, or they have been manually unbanned.")
 public class BanCommand implements SubCommand {
 
     @Override

@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @Usage(usage = "<player>")
-@Description(description = "Unfreezes a player. Unfreezing a player will allow the player to continue playing on the server like normal before they were frozen.")
+@Description(description = "Unfreeze a player. Unfreezing a player will allow the player to continue playing on the server like normal before they were frozen.")
 public class UnfreezeCommand implements SubCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
