@@ -4,7 +4,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Exortions/PremiumPunishments-3.0">
-    <img src="images/banner.png" alt="Banner" width="1920" height="679">
+    <img src="images/banner.png" alt="Banner" width="595" height="242">
   </a>
 
 <h3 align="center">Premium Punishments</h3>
