@@ -8,7 +8,7 @@
     <artifactId>PremiumPunishments</artifactId>
     <name>PremiumPunishments</name>
     <version>3.0.0.0</version>
-    <description>A lightweight, easy to use plugin that allows you to manage punishments on your Minecraft server.</description>
+    <description>A lightweight, easy to use plugin that allows you to manage punishments on your Minecraft server. From bans to warns, Premium Punishments is equip to handle anything that staff may need while moderating a server.</description>
     <packaging>jar</packaging>
 
     <properties>

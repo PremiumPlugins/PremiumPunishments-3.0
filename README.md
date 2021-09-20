@@ -1,14 +1,10 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
+[<h1  align="center">![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url] [![Apache 2.0 License][license-shield]][license-url]</h1>
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/Exortions/PremiumPunishments">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/Exortions/PremiumPunishments-3.0">
+    <img src="images/banner.png" alt="Banner" width="1920" height="679">
   </a>
 
 <h3 align="center">Premium Punishments</h3>
@@ -16,14 +12,14 @@
   <p align="center">
     A lightweight, easy to use plugin that allows you to manage punishments on your Minecraft server. From bans to warns, Premium Punishments is equip to handle anything that staff may need while moderating a server.
     <br />
-    <a href="https://github.com/Exortions/PremiumPunishments"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/Exortions/PremiumPunishments-3.0"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Exortions/PremiumPunishments">View Demo</a>
+    <a href="https://github.com/Exortions/PremiumPunishments-3.0">View Demo</a>
     ·
-    <a href="https://github.com/Exortions/PremiumPunishments/issues">Report Bug</a>
+    <a href="https://github.com/Exortions/PremiumPunishments-3.0/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Exortions/PremiumPunishments/issues">Request Feature</a>
+    <a href="https://github.com/Exortions/PremiumPunishments-3.0/issues">Request Feature</a>
   </p>
 
 
@@ -45,7 +41,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -60,60 +55,39 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`Exortions`, `PremiumPunishments`, `Exortions1`, `exortionsmc@gmail.com`, `Premium Punishments`, `A lightweight, easy to use plugin that allows you to manage punishments on your Minecraft server. From bans to warns, Premium Punishments is equip to handle anything that staff may need while moderating a server.`
+A lightweight, easy to use plugin that allows you to manage punishments on your Minecraft server. From bans to warns, Premium Punishments is equip to handle anything that staff may need while moderating a server.
 
 
 ### Built With
 
-* []()
-* []()
-* []()
+* [Spigot API](https://www.spigotmc.org/)
+* [Plugin Utils](https://www.github.com/Exortions/PluginUtils)
+* [Maven](https://maven.apache.org/)
 
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow these simple steps.
+To add Premium Punishments to your Minecraft server, follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
+* A Spigot Minecraft server
+  ```
+  https://www.spigotmc.org/
   ```
 
 ### Installation
 
-1. Clone the repo
-   ```sh
-   git clone https://github.com/Exortions/PremiumPunishments.git
-   ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
+1. Download the latest jar file at the
+   spigot page.
+2. Drag and drop the jar file into your Minecraft server's plugins directory.
 
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/Exortions/PremiumPunishments/issues) for a list of proposed features (and known issues).
-
-
+See the [open issues](https://github.com/Exortions/PremiumPunishments-3.0/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -131,22 +105,23 @@ Contributions are what make the open source community such an amazing place to l
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the Apache 2.0 License. See `LICENSE` for more information.
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* []()
-* []()
-* []()
+* [Spigot API](https://www.spigotmc.org/)
+* [Plugin Utils](https://www.github.com/Exortions/PluginUtils)
+* [Maven](https://maven.apache.org/)
+* [README Template](https://github.com/othneildrew/Best-README-Template)
 
 [contributors-shield]: https://img.shields.io/github/contributors/Exortions/repo.svg?style=for-the-badge
-[contributors-url]: https://github.com/Exortions/PremiumPunishments/graphs/contributors
+[contributors-url]: https://github.com/Exortions/PremiumPunishments-3.0/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/Exortions/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/Exortions/PremiumPunishments/network/members
+[forks-url]: https://github.com/Exortions/PremiumPunishments-3.0/network/members
 [stars-shield]: https://img.shields.io/github/stars/Exortions/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/Exortions/PremiumPunishments/stargazers
+[stars-url]: https://github.com/Exortions/PremiumPunishments-3.0/stargazers
 [issues-shield]: https://img.shields.io/github/issues/Exortions/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/Exortions/PremiumPunishments/issues
+[issues-url]: https://github.com/Exortions/PremiumPunishments-3.0/issues
 [license-shield]: https://img.shields.io/github/license/Exortions/repo.svg?style=for-the-badge
-[license-url]: https://github.com/Exortions/PremiumPunishments/blob/master/LICENSE.txt
+[license-url]: https://github.com/Exortions/PremiumPunishments-3.0/blob/master/LICENSE
