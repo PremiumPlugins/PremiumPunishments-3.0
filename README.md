@@ -1,14 +1,14 @@
-[<h1  style="text-align: center;">![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url] [![Apache 2.0 License][license-shield]][license-url]</h1>
+[<h1 align="center">![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url] [![Apache 2.0 License][license-shield]][license-url]</h1>
 
 <br />
-<p style="text-align: center;">
+<p align="center">
   <a href="https://github.com/Exortions/PremiumPunishments-3.0">
     <img src="images/banner.png" alt="Banner" width="595" height="242">
   </a>
 </p>
 
-<h3 style="text-align: center;">Premium Punishments</h3>
-<p style="text-align: center;">
+<h3 align="center">Premium Punishments</h3>
+<p align="center">
     A lightweight, easy to use plugin that allows you to manage punishments on your Minecraft server. From bans to warns, Premium Punishments is equip to handle anything that staff may need while moderating a server.
     <br />
     <a href="https://github.com/Exortions/PremiumPunishments-3.0"><strong>Explore the project »</strong></a>
@@ -56,7 +56,7 @@ A lightweight, easy to use plugin that allows you to manage punishments on your 
 4. Optional staff-chat plugin that allows staff to converse privately.
 
 ### Commands
-<div style="text-align: center;"><img src="images/commands.png" alt="Commands" width="595" height="242"></div>
+<div align="center"><img src="images/commands.png" alt="Commands" width="595" height="242"></div>
 
 * /premiumpunishments ban - Ban a player with a custom duration and message. Banning a player will disconnect them from the server and display to them the custom message, as well as prevent them from re-connecting to the server until the duration has expired, or they have been manually unbanned.
 * /premiumpunishments unban - Unbans a player. Unbanning a player will revoke all ban punishments on them, and will allow them to join the server if they were banned before unbanning them.
