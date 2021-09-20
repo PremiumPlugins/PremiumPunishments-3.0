@@ -27,6 +27,8 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#commands">Commands</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
