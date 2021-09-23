@@ -129,6 +129,10 @@ public final class PremiumPunishments extends SpigotPlugin {
 
         messages.put("ban-message", ChatUtils.colorize(configuration.getString("messages.punishments.ban-message")));
         messages.put("perm-ban-message", ChatUtils.colorize(configuration.getString("messages.punishments.perm-ban-message")));
+
+        messages.put("ban-broadcast-message", ChatUtils.colorize(configuration.getString("messages.punishments.ban-broadcast-message")));
+        messages.put("perm-ban-broadcast-message", ChatUtils.colorize(configuration.getString("messages.punishments.perm-ban-broadcast-message")));
+
         messages.put("mute-message", ChatUtils.colorize(configuration.getString("messages.punishments.mute-message")));
         messages.put("perm-mute-message", ChatUtils.colorize(configuration.getString("messages.punishments.perm-mute-message")));
 

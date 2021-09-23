@@ -25,7 +25,7 @@ public class UnmuteCommand implements SubCommand {
         if (args.length == 1) {
             boolean muted = checkMuted(args[0]);
 
-            if (!muted) { sender.sendMessage(prefix() + ChatColor.RED + "That player is not currently banned!"); return; }
+            if (!muted) { sender.sendMessage(prefix() + ChatColor.RED + "That player is not currently muted!"); return; }
 
             MinecraftPlayer mp = MinecraftPlayerRepository.getPlayerByUuid(Objects.requireNonNull(MojangAPI.getUuidByName(args[0])));
 

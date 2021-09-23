@@ -11,6 +11,9 @@ messages:
     ban-message: "&cYou are temporarily banned from this server for &f%time%&c!\n\n&7Reason: &f%reason%\n&7Banned by: &f%admin%\n&7Ban ID: &f%id%"
     perm-ban-message: "&cYou are permanently banned from this server!\n\n&7Reason: &f%reason%\n&7Banned by: &f%admin%\n&7Ban ID: &f%id%"
 
+    ban-broadcast-message: "&f%admin%&c has banned &f%player%&c for &f%reason%&c, and expires in &f%time%&c."
+    perm-ban-broadcast-message: "&f%admin%&c has permanently banned &f%player%&c for &f%reason%&c."
+
     mute-message: "&cYou are temporarily muted on this server for &f%time%&c!\n\n&7Reason: &f%reason%\n&7Muted by: &f%admin%\n\n&7Mute ID: &f%id%"
     perm-mute-message: "&cYou are permanently muted on this server!\n\n&7Reason: &f%reason%\n&7Muted by: &f%admin%\n&7Mute ID: &f%id%"
 

@@ -32,6 +32,7 @@ public class Placeholders {
     }
 
     public static String setBanPlaceholders(String s, Ban ban) {
+        System.out.println(ban);
         if (ban.getType() == BanType.ban) return s.replaceAll("%reason%", ban.getReason()).replaceAll("%admin%", ban.getAdmin()).replaceAll("%time%", findTime(MinecraftPlayerRepository.getPlayerByUuid(ban.getUuid()).getBanexpirydate())).replaceAll("%id%", Integer.toString(ban.getId()));
         else return s.replaceAll("%reason%", ban.getReason()).replaceAll("%admin%", ban.getAdmin()).replaceAll("%time%", "Never").replaceAll("%id%", Integer.toString(ban.getId()));
     }
