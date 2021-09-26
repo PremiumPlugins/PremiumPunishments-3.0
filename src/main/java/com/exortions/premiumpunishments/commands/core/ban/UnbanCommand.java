@@ -52,18 +52,18 @@ public class UnbanCommand implements SubCommand {
         if (silent) mp = MinecraftPlayerRepository.getPlayerByUuid(Objects.requireNonNull(MojangAPI.getUuidByName(args[1]))); else mp = MinecraftPlayerRepository.getPlayerByUuid(Objects.requireNonNull(MojangAPI.getUuidByName(args[0])));
 
         if (silent) {
-            database().execute("DELETE FROM " + PremiumPunishments.tablePrefix + "bans where uuid='" + UUID.fromString(MojangAPI.getUuidByName(args[1])));
+            database().execute("DELETE FROM " + PremiumPunishments.tablePrefix + "bans where uuid='" + UUID.fromString(MojangAPI.getUuidByName(args[1])) + "'");
             database().execute("DELETE FROM " + PremiumPunishments.tablePrefix + "players where uuid='" + UUID.fromString(MojangAPI.getUuidByName(args[1])) + "'");
             database().insertPlayer(mp.getUuid(), mp.getUsername(), false, mp.getBanexpirydate(), mp.getMuted(), mp.getMuteexpirydate(), mp.getWarns(), mp.getKicks());
             database().execute("DELETE FROM " + PremiumPunishments.tablePrefix + "banned_ips where uuid='" + UUID.fromString(MojangAPI.getUuidByName(args[1])) + "'");
+            if (sender instanceof Player) LogManager.addLog((Player) sender, "Unban", "None", args[1], "None");
         } else {
             database().execute("DELETE FROM " + PremiumPunishments.tablePrefix + "bans where uuid='" + UUID.fromString(MojangAPI.getUuidByName(args[0])) + "'");
             database().execute("DELETE FROM " + PremiumPunishments.tablePrefix + "players where uuid='" + UUID.fromString(MojangAPI.getUuidByName(args[0])) + "'");
             database().insertPlayer(mp.getUuid(), mp.getUsername(), false, mp.getBanexpirydate(), mp.getMuted(), mp.getMuteexpirydate(), mp.getWarns(), mp.getKicks());
             database().execute("DELETE FROM " + PremiumPunishments.tablePrefix + "banned_ips where uuid='" + UUID.fromString(MojangAPI.getUuidByName(args[0])) + "'");
+            if (sender instanceof Player) LogManager.addLog((Player) sender, "Unban", "None", args[0], "None");
         }
-
-        if (sender instanceof Player) LogManager.addLog((Player) sender, "Unban", "None", args[0], "None");
 
         if (!silent) sender.sendMessage(prefix() + ChatColor.WHITE + "Successfully unbanned " + args[0] + "!"); else sender.sendMessage(prefix() + ChatColor.WHITE + "Successfully unbanned " + args[1] + "!");
         return false;

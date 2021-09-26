@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Usage(usage = "<player>")
-@Description(description = "View all logs for a staff member. This will show what commands they've been using.")
-public class LogCommand implements SubCommand {
+@Description(description = "Clears the log of a player. This command should only be avaliable to the owners of the server.")
+public class ClearlogCommand implements SubCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
@@ -33,20 +33,9 @@ public class LogCommand implements SubCommand {
                 return;
             }
 
-            String message = "";
+            LogRepository.clearLogsByUuid(uuid);
 
-            message = message.concat(prefix() + args[0] + "'s logs:\n" + ChatColor.RED + " > " + ChatColor.WHITE + "Format: Type, Player, Date\n");
-
-            int ln = 0;
-
-            for (Log log : logs) {
-                ln++;
-                message = message.concat(ChatColor.RED + "  " + ln + ". " + ChatColor.DARK_RED + log.getType() + " " + ChatColor.WHITE + log.getTarget() + " " + log.getDate() + "\n");
-            }
-
-            message = message.concat(prefix() + ChatColor.WHITE + "END LOG");
-
-            sender.sendMessage(message);
-        } else Bukkit.dispatchCommand(sender, "premiumpunishments help log");
+            sender.sendMessage(prefix() + "Successfully cleared " + args[0] + "'s logs!");
+        } else Bukkit.dispatchCommand(sender, "premiumpunishments help clearlog");
     }
 }

@@ -12,10 +12,7 @@ import com.exortions.premiumpunishments.commands.core.mute.MuteCommand;
 import com.exortions.premiumpunishments.commands.core.mute.UnmuteCommand;
 import com.exortions.premiumpunishments.commands.core.notes.NoteCommand;
 import com.exortions.premiumpunishments.commands.core.warn.WarnCommand;
-import com.exortions.premiumpunishments.commands.miscellaneous.HelpCommand;
-import com.exortions.premiumpunishments.commands.miscellaneous.InfoCommand;
-import com.exortions.premiumpunishments.commands.miscellaneous.LogCommand;
-import com.exortions.premiumpunishments.commands.miscellaneous.ReloadCommand;
+import com.exortions.premiumpunishments.commands.miscellaneous.*;
 import org.bukkit.ChatColor;
 
 import java.util.List;
@@ -40,6 +37,7 @@ public class CommandHandler extends SubCommandHandler {
         List<SubCommand> subCommands = getSubcommands();
 
         subCommands.add(new UnfreezeCommand());
+        subCommands.add(new ClearlogCommand());
         subCommands.add(new FreezeCommand());
         subCommands.add(new ReloadCommand());
         subCommands.add(new UnmuteCommand());

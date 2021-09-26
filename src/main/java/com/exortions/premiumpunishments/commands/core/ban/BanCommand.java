@@ -1,6 +1,8 @@
 package com.exortions.premiumpunishments.commands.core.ban;
 
+import com.exortions.pluginutils.chat.ChatUtils;
 import com.exortions.premiumpunishments.enums.BanType;
+import com.exortions.premiumpunishments.objects.ban.Ban;
 import com.exortions.premiumpunishments.objects.ban.BanRepository;
 import com.exortions.premiumpunishments.objects.command.Description;
 import com.exortions.premiumpunishments.objects.command.RequiresPlayer;
@@ -11,14 +13,19 @@ import com.exortions.premiumpunishments.objects.minecraftplayer.MinecraftPlayerR
 import com.exortions.premiumpunishments.objects.settings.Settings;
 import com.exortions.premiumpunishments.util.LogManager;
 import com.exortions.premiumpunishments.util.Placeholders;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Usage(usage = "[-s] <player> <time> <reason>")
 @Description(description = "Ban a player with a custom duration and message. Banning a player will disconnect them from the server and display to them the custom message, as well as prevent them from re-connecting to the server until the duration has expired, or they have been manually unbanned. Banning also has the option to be silent only to staff.")
@@ -39,7 +46,7 @@ public class BanCommand implements SubCommand {
             if (args[0].equals("-s")) silent = true;
 
             if (silent) {
-                if (args.length >= 4) {
+                if (args.length >= 3) {
                     Player target = Bukkit.getPlayer(args[1]);
                     if (target == null) {
                         player.sendMessage(messages().get("unknown-player").replaceAll("%s", args[1]));
@@ -52,12 +59,15 @@ public class BanCommand implements SubCommand {
                     }
 
                     String reason = "";
-                    int i = 0;
-                    for (String s : args) {
-                        if (i > 2) reason = reason.concat(s + " ");
-                        i++;
-                    }
-                    reason = reason.substring(0, reason.length() - 1);
+                    if (args.length >= 4) {
+                        int i = 0;
+                        for (String s : args) {
+                            if (i > 2) reason = reason.concat(s + " ");
+                            i++;
+                        }
+                        reason = reason.substring(0, reason.length() - 1);
+                    } else reason = "The Ban Hammer has spoken!";
+
                     String time = args[2];
 
                     MinecraftPlayer mp = getMinecraftPlayer(target);
@@ -69,15 +79,10 @@ public class BanCommand implements SubCommand {
 
                     ban(player, target, reason, time, mp);
 
-                    for (Player p : Bukkit.getOnlinePlayers()) {
-                        if (time.equals("-1"))
-                            p.sendMessage(Placeholders.setBanPlaceholders(messages().get("perm-ban-broadcast-message") + ChatColor.WHITE + " [SILENT]", BanRepository.getBanByUuid(target.getUniqueId())));
-                        else
-                            p.sendMessage(Placeholders.setBanPlaceholders(messages().get("ban-broadcast-message") + ChatColor.WHITE + " [SILENT]", BanRepository.getBanByUuid(target.getUniqueId())));
-                    }
+                    for (Player p : Bukkit.getOnlinePlayers()) if (p.hasPermission("premiumpunishments.staff-broadcasts")) sendHoverableText(target, p, true, time.equals("-1"), time, BanRepository.getBanByUuid(target.getUniqueId()));
                 } else Bukkit.dispatchCommand(player, "premiumpunishments help ban");
             } else {
-                if (args.length >= 3) {
+                if (args.length >= 2) {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target == null) {
                         player.sendMessage(messages().get("unknown-player").replaceAll("%s", args[0]));
@@ -90,12 +95,15 @@ public class BanCommand implements SubCommand {
                     }
 
                     String reason = "";
-                    int i = 0;
-                    for (String s : args) {
-                        if (i > 1) reason = reason.concat(s + " ");
-                        i++;
-                    }
-                    reason = reason.substring(0, reason.length() - 1);
+                    if (args.length >= 4) {
+                        int i = 0;
+                        for (String s : args) {
+                            if (i > 1) reason = reason.concat(s + " ");
+                            i++;
+                        }
+                        reason = reason.substring(0, reason.length() - 1);
+                    } else reason = "The Ban Hammer has spoken!";
+
                     String time = args[1];
 
                     MinecraftPlayer mp = getMinecraftPlayer(target);
@@ -107,14 +115,7 @@ public class BanCommand implements SubCommand {
 
                     ban(player, target, reason, time, mp);
 
-                    for (Player p : Bukkit.getOnlinePlayers()) {
-                        if (p.hasPermission("premiumpunishments.staff-broadcasts")) {
-                            if (time.equals("-1"))
-                                p.sendMessage(Placeholders.setBanPlaceholders(messages().get("perm-ban-broadcast-message"), BanRepository.getBanByUuid(target.getUniqueId())));
-                            else
-                                p.sendMessage(Placeholders.setBanPlaceholders(messages().get("ban-broadcast-message"), BanRepository.getBanByUuid(target.getUniqueId())));
-                        }
-                    }
+                    for (Player p : Bukkit.getOnlinePlayers()) sendHoverableText(target, p, false, time.equals("-1"), time, BanRepository.getBanByUuid(target.getUniqueId()));
                 } else Bukkit.dispatchCommand(player, "premiumpunishments help ban");
             }
         } else Bukkit.dispatchCommand(player, "premiumpunishments help ban");
@@ -141,4 +142,31 @@ public class BanCommand implements SubCommand {
 
         player.sendMessage(prefix() + "Successfully banned " + target.getName() + " for " + time + ".");
     }
+
+    private void sendHoverableText(Player target, Player onlinePlayer, boolean silent, boolean perm, String time, Ban ban) {
+        TextComponent text;
+        if (silent) text = new TextComponent(perm ? Placeholders.setBanPlaceholders(messages().get("perm-ban-broadcast-message") + ChatColor.WHITE + " [SILENT]", BanRepository.getBanByUuid(target.getUniqueId())) : Placeholders.setBanPlaceholders(messages().get("ban-broadcast-message") + ChatColor.WHITE + " [SILENT]", BanRepository.getBanByUuid(target.getUniqueId()))); else text = new TextComponent(perm ? Placeholders.setBanPlaceholders(messages().get("perm-ban-broadcast-message"), BanRepository.getBanByUuid(target.getUniqueId())) : Placeholders.setBanPlaceholders(messages().get("ban-broadcast-message"), BanRepository.getBanByUuid(target.getUniqueId())));
+
+        time = time.equals("-1") ? "Permanent Ban" : time;
+
+        String slnt = silent ? "Yes" : "No";
+
+        String hover = "";
+
+        hover = hover.concat(prefix() + "Player banned by " + ban.getAdmin() + "\n");
+        hover = hover.concat(colorize("&fPlayer  &c» &f" + ban.getUsername() + "\n"));
+        hover = hover.concat(colorize("&fReason &c» &f" + ban.getReason() + "\n"));
+        hover = hover.concat(colorize("&fTime     &c» &f" + time + "\n"));
+        hover = hover.concat(colorize("&fSilent   &c» &f" + slnt + "\n"));
+        hover = hover.concat(colorize("&fBan ID  &c» &f" + ban.getId()));
+
+        text.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(hover)));
+
+        onlinePlayer.spigot().sendMessage(text);
+    }
+
+    private String colorize(String s) {
+        return ChatUtils.colorize(s);
+    }
+
 }

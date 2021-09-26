@@ -39,6 +39,8 @@ messages:
     kick-broadcast-message: "&f%admin%&c has kicked &f%player%&c for &f%reason%&c."
 
 settings:
+  broadcasts:
+    hoverable-text: true
   commands:
     ban:
       ip-ban: true

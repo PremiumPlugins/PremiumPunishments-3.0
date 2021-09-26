@@ -29,6 +29,9 @@ public class TabCompleteHandler implements TabCompleter {
         List<String> tab = new ArrayList<>();
         switch (args.length) {
             case 1:
+                boolean perms = false;
+                for (SubCommand subcommand : new CommandHandler().getSubcommands()) if (sender.hasPermission(subcommand.permission())) perms = true;
+                if (!perms) break;
                 for (SubCommand subcommand : subcommands) tab.add(subcommand.name());
                 break;
             case 2:

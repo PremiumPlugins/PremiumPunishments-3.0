@@ -167,7 +167,7 @@ public class DatabaseHandler extends DatabaseManipulator {
                 String sql = "CREATE TABLE `" + getDatabase() + "`.`" + tablePrefix + "logs` (" +
                         "  `uuid` VARCHAR(100) NOT NULL," +
                         "  `type` VARCHAR(45) NOT NULL," +
-                        "  `reason` VARCHAR(45) NOT NULL," +
+                        "  `reason` VARCHAR(300) NOT NULL," +
                         "  `target` VARCHAR(45) NOT NULL," +
                         "  `username` VARCHAR(45) NOT NULL," +
                         "  `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP," +

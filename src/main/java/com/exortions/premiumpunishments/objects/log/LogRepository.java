@@ -26,4 +26,8 @@ public class LogRepository {
         return null;
     }
 
+    public static void clearLogsByUuid(String uuid) {
+        PremiumPunishments.getPlugin().getDatabase().execute("DELETE FROM " + PremiumPunishments.tablePrefix + "logs WHERE uuid='" + uuid + "'");
+    }
+
 }

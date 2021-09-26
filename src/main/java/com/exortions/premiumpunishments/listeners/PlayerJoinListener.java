@@ -50,8 +50,10 @@ public class PlayerJoinListener implements Listener {
                             return;
                         }
                         player.kickPlayer(Placeholders.setBanPlaceholders(PremiumPunishments.getPlugin().getMessages().get("ban-message"), ban));
+                        e.setJoinMessage(null);
                     } else if (ban.getType() == BanType.perm) {
                         player.kickPlayer(Placeholders.setBanPlaceholders(PremiumPunishments.getPlugin().getMessages().get("perm-ban-message"), ban));
+                        e.setJoinMessage(null);
                     }
                 }
             }

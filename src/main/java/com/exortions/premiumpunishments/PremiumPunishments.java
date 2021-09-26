@@ -11,6 +11,7 @@ import com.exortions.premiumpunishments.handlers.TabCompleteHandler;
 import com.exortions.premiumpunishments.listeners.FreezeListener;
 import com.exortions.premiumpunishments.listeners.PlayerChatListener;
 import com.exortions.premiumpunishments.listeners.PlayerJoinListener;
+import com.exortions.premiumpunishments.listeners.PlayerQuitListener;
 import com.exortions.premiumpunishments.objects.settings.Settings;
 import com.exortions.premiumpunishments.util.DatabaseHandler;
 import com.exortions.premiumpunishments.util.lang.LanguageManager;
@@ -54,6 +55,7 @@ public final class PremiumPunishments extends SpigotPlugin {
 
     @Override
     public void onEnable() {
+        sendMessage(getPrefix() + "Detected Bukkit version " + Bukkit.getServer().getBukkitVersion());
         boolean loaded = false;
         ms = System.currentTimeMillis();
 
@@ -83,6 +85,7 @@ public final class PremiumPunishments extends SpigotPlugin {
 
         Bukkit.getPluginManager().registerEvents(new PlayerChatListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(), this);
         Bukkit.getPluginManager().registerEvents(new FreezeListener(), this);
     }
 
@@ -109,6 +112,7 @@ public final class PremiumPunishments extends SpigotPlugin {
         configuration = new Configuration(this, "config.yml");
 
         new Settings(
+                configuration.getBoolean("settings.broadcasts.hoverable-text"),
                 configuration.getBoolean("settings.commands.ban.ip-ban"),
                 configuration.getBoolean("settings.commands.freeze.disable-movement"),
                 configuration.getBoolean("settings.commands.freeze.disable-interactions"),
@@ -118,6 +122,8 @@ public final class PremiumPunishments extends SpigotPlugin {
                 configuration.getInt("settings.commands.freeze.spam-message-delay"));
 
         sendMessage(getPrefix() + "Settings:");
+        sendMessage(getPrefix() + " - Hoverable text on broadcast: " + Settings.BROADCASTS_HOVERABLE_TEXT);
+        sendMessage(getPrefix() + "   ");
         sendMessage(getPrefix() + " - Ban IP addresses: " + Settings.BAN_IP_ADDRESSES);
         sendMessage(getPrefix() + "   ");
         sendMessage(getPrefix() + " - Disable movement (Freeze): " + Settings.FREEZE_DISABLE_MOVEMENT);
@@ -249,7 +255,7 @@ public final class PremiumPunishments extends SpigotPlugin {
     private void sendStartupMessage() {
         sendMessage(ChatColor.RED + "    __   " + ChatColor.GOLD + "__");
         sendMessage(ChatColor.RED + "   |__) " + ChatColor.GOLD +"|__)   " + ChatColor.RESET + "PremiumPunishments v" + getPluginVersion());
-        sendMessage(ChatColor.RED + "   |    " + ChatColor.GOLD + "|      " + ChatColor.RESET + "Running on Bukkit - CraftBukkit");
+        sendMessage(ChatColor.RED + "   |    " + ChatColor.GOLD + "|      " + ChatColor.RESET + "Running on Bukkit - " + Bukkit.getServer().getName());
         sendMessage(ChatColor.RED + "        ");
     }
 
