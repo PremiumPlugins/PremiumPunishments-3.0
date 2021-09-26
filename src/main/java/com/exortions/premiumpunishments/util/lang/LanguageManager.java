@@ -3,6 +3,7 @@ package com.exortions.premiumpunishments.util.lang;
 import com.exortions.premiumpunishments.PremiumPunishments;
 import com.exortions.premiumpunishments.util.lang.languages.en_us;
 import com.exortions.premiumpunishments.util.lang.languages.es_es;
+import com.exortions.premiumpunishments.util.lang.languages.ru;
 import lombok.Data;
 
 import java.io.File;
@@ -21,8 +22,9 @@ public class LanguageManager {
 
         languages = new ArrayList<>();
 
-        languages.add(new en_us());
-        languages.add(new es_es());
+        languages.add(new en_us()); // US English
+        languages.add(new es_es()); // Spanish (Spain)
+        languages.add(new ru()); // Russian
 
         File folder = new File(PremiumPunishments.getPlugin().getDataFolder() + File.separator + "lang");
         if (!folder.exists()) folder.mkdirs();
