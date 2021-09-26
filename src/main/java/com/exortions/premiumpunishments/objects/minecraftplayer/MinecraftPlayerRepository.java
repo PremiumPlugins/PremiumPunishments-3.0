@@ -14,7 +14,7 @@ public class MinecraftPlayerRepository {
 
     public static MinecraftPlayer getPlayerByUuid(String uuid) {
         try {
-            String sql = "SELECT * FROM players WHERE uuid='" + uuid + "'";
+            String sql = "SELECT * FROM " + PremiumPunishments.tablePrefix + "players WHERE uuid='" + uuid + "'";
             ResultSet set = PremiumPunishments.getPlugin().getDatabase().query(sql);
             while (set.next()) {
                 String username = set.getString("username");
@@ -33,7 +33,7 @@ public class MinecraftPlayerRepository {
 
     public static MinecraftPlayer getPlayerByUuid(UUID uuid) {
         try {
-            String sql = "SELECT * FROM players WHERE uuid='" + uuid.toString() + "'";
+            String sql = "SELECT * FROM " + PremiumPunishments.tablePrefix + "players WHERE uuid='" + uuid.toString() + "'";
             ResultSet set = PremiumPunishments.getPlugin().getDatabase().query(sql);
             while (set.next()) {
                 String username = set.getString("username");
@@ -52,7 +52,7 @@ public class MinecraftPlayerRepository {
 
     public static MinecraftPlayer getPlayerByUsername(String username) {
         try {
-            String sql = "SELECT * FROM players WHERE username='" + username + "'";
+            String sql = "SELECT * FROM " + PremiumPunishments.tablePrefix + "players WHERE username='" + username + "'";
             ResultSet set = PremiumPunishments.getPlugin().getDatabase().query(sql);
             while (set.next()) {
                 String uuid = set.getString("uuid");
@@ -71,7 +71,7 @@ public class MinecraftPlayerRepository {
 
     public static MinecraftPlayer getPlayer(Player player) {
         try {
-            String sql = "SELECT * FROM players WHERE uuid='" + player.getUniqueId() + "'";
+            String sql = "SELECT * FROM " + PremiumPunishments.tablePrefix + "players WHERE uuid='" + player.getUniqueId() + "'";
             ResultSet set = PremiumPunishments.getPlugin().getDatabase().query(sql);
             while (set.next()) {
                 String uuid = set.getString("uuid");

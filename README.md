@@ -57,11 +57,26 @@ A lightweight, easy to use plugin that allows you to manage punishments on your 
 2. Lightweight architecture that allows the server to run smoothly along with Premium Punishments
 3. Built-in MySQL support that allows the server to make use of databases.
 4. Optional staff-chat plugin that allows staff to converse privately.
+5. Built in language files that allow you to change your language by just typing the language name.
+
+### Permissions
+
+* `premiumpunishments.ban` Access to the ban command.
+* `premiumpunishments.unban` Access to the unban command.
+* `premiumpunishments.mute` Access to the mute command.
+* `premiumpunishments.unmute` Access to the unmute command.
+* `premiumpunishments.kick` Access to the kick command.
+* `premiumpunishments.warn` Access to the warn command.
+* `premiumpunishments.freeze` Access to the freeze command.
+* `premiumpunishments.unfreeze` Access to the unfreeze command.
+* `premiumpunishments.note` Access to the note command.
+* `premiumpunishments.staff-broadcast` Can see silent punishments (E.g, if a ban is silent, every player with this permission will still see the message.)
+* `premiumpunishments.punishment-immune` If a player has this permission, they will be immune to all punishments.
 
 ### Commands
 
 Tags:
--s - Only broadcasts the ban message to players with the permission `premiumpunishments.staff-broadcasts`
+-s - Only broadcasts the punishment message to players with the permission `premiumpunishments.staff-broadcasts`
 
 * **Ban** `/premiumpunishments ban [-s] <player> <time> <reason>`- Ban a player with a custom duration and message. Banning a player will disconnect them from the server and display to them the custom message, as well as prevent them from re-connecting to the server until the duration has expired, or they have been manually unbanned. Banning also has the option to be silent only to staff.
 * **Unban** `/premiumpunishments unban [-s] <player> <time> <reason>`- Unbans a player. Unbanning a player will revoke all ban punishments on them, and will allow them to join the server if they were banned before unbanning them.

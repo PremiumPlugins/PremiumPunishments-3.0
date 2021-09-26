@@ -1,6 +1,5 @@
 package com.exortions.premiumpunishments.commands.core.notes;
 
-import com.exortions.pluginutils.command.subcommand.SubCommandHandler;
 import com.exortions.premiumpunishments.objects.command.Description;
 import com.exortions.premiumpunishments.objects.command.RequiresPlayer;
 import com.exortions.premiumpunishments.objects.command.SubCommand;

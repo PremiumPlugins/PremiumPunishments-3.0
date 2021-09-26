@@ -37,7 +37,7 @@ public class MinecraftPlayer {
     }
 
     public void updateSql() {
-        String sql = "DELETE from players where uuid='" + uuid + "'";
+        String sql = "DELETE from " + PremiumPunishments.getPlugin().getDatabase().getTablePrefix() + "players where uuid='" + uuid + "'";
         PremiumPunishments.getPlugin().getDatabase().execute(sql);
 
         PremiumPunishments.getPlugin().getDatabase().insertPlayer(uuid, username, banned, banexpirydate, muted, muteexpirydate, warns, kicks);

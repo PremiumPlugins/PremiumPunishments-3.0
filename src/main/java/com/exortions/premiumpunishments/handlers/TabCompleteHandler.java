@@ -53,6 +53,7 @@ public class TabCompleteHandler implements TabCompleter {
                     case "mute":
                     case "kick":
                         for (Player player : Bukkit.getOnlinePlayers()) tab.add(player.getName());
+                        tab.add("-s");
                         break;
                     case "note":
                         tab.add("add");
@@ -69,6 +70,12 @@ public class TabCompleteHandler implements TabCompleter {
                 break;
             case 3:
                 if (args[0].equals("ban") || args[0].equals("mute")) {
+                    if (args[1].equals("-s")) {
+                        for (Player player : Bukkit.getOnlinePlayers()) {
+                            tab.add(player.getName());
+                        }
+                    }
+                    if (args[1].equals("-s")) break;
                     if (args[2].isEmpty()) break;
                     if (args[2].contains("s") || args[2].contains("m") || args[2].contains("h") || args[2].contains("d") || args[2].contains("y")) break;
                     tab.add(args[2] + "s");
@@ -76,14 +83,17 @@ public class TabCompleteHandler implements TabCompleter {
                     tab.add(args[2] + "h");
                     tab.add(args[2] + "d");
                     tab.add(args[2] + "y");
-                } else if (args[0].equals("note")) {
-                    if (args[1].equals("add")) {
-                        break;
-                    } else if (args[1].equals("list")) {
-                        break;
-                    } else if (args[1].equals("remove")) {
-                        break;
-                    }
+                }
+            case 4:
+                if (args[0].equals("ban") || args[0].equals("mute")) {
+                    if (!args[1].equals("-s")) break;
+                    if (args[3].isEmpty()) break;
+                    if (args[3].contains("s") || args[3].contains("m") || args[3].contains("h") || args[3].contains("d") || args[3].contains("y")) break;
+                    tab.add(args[3] + "s");
+                    tab.add(args[3] + "m");
+                    tab.add(args[3] + "h");
+                    tab.add(args[3] + "d");
+                    tab.add(args[3] + "y");
                 }
         }
         return tab;

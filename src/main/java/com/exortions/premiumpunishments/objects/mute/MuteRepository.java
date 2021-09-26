@@ -14,7 +14,7 @@ public class MuteRepository {
 
     public static Mute getMuteByUuid(UUID uuid) {
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM mutes WHERE uuid='" + uuid.toString() + "'");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "mutes WHERE uuid='" + uuid.toString() + "'");
 
             if (set.next()) {
                 String username = set.getString("username");
@@ -30,7 +30,7 @@ public class MuteRepository {
 
     public static Mute getMuteByUuid(String uuid) {
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM mutes WHERE uuid='" + uuid + "'");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "mutes WHERE uuid='" + uuid + "'");
 
             if (set.next()) {
                 String username = set.getString("username");
@@ -46,7 +46,7 @@ public class MuteRepository {
 
     public static Mute getMuteById(int id) {
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM mutes WHERE id='" + id + "'");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "mutes WHERE id='" + id + "'");
 
             if (set.next()) {
                 String uuid = set.getString("uuid");
@@ -63,7 +63,7 @@ public class MuteRepository {
     public static List<Mute> getPermanentMutes() {
         List<Mute> mutes = new ArrayList<>();
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM mutes WHERE mute-type='perm'");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "mutes WHERE mute-type='perm'");
 
             while (set.next()) {
                 String uuid = set.getString("uuid");
@@ -81,7 +81,7 @@ public class MuteRepository {
     public static List<Mute> getMutes() {
         List<Mute> mutes = new ArrayList<>();
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM mutes WHERE mute-type='mute'");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "mutes WHERE mute-type='mute'");
 
             while (set.next()) {
                 String uuid = set.getString("uuid");
@@ -99,7 +99,7 @@ public class MuteRepository {
     public static List<Mute> getAllMutes() {
         List<Mute> mutes = new ArrayList<>();
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM mutes");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "mutes");
 
             while (set.next()) {
                 String uuid = set.getString("uuid");
@@ -117,7 +117,7 @@ public class MuteRepository {
     public static List<Mute> getMutesByAdmin(String admin) {
         List<Mute> mutes = new ArrayList<>();
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM mutes WHERE admin='" + admin + "'");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "mutes WHERE admin='" + admin + "'");
 
             while (set.next()) {
                 String uuid = set.getString("uuid");
@@ -133,7 +133,7 @@ public class MuteRepository {
 
     public static int getNextId() {
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT id FROM mutes");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT id FROM " + PremiumPunishments.tablePrefix + "mutes");
 
             int id = 0;
 

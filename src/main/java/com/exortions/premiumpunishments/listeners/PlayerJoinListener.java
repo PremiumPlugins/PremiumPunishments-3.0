@@ -23,11 +23,11 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
 
-        ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM players WHERE uuid='" + player.getUniqueId() + "'");
+        ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "players WHERE uuid='" + player.getUniqueId() + "'");
 
         MinecraftPlayer p = MinecraftPlayerRepository.getPlayerByUuid(player.getUniqueId());
 
-        ResultSet ips = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM banned_ips");
+        ResultSet ips = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "banned_ips");
 
         try {
             while (ips.next()) {
@@ -46,7 +46,7 @@ public class PlayerJoinListener implements Listener {
                     if (ban.getType() == BanType.ban) {
                         if (p.getBanexpirydate().getTime() < System.currentTimeMillis()) {
                             p.setBanned(false);
-                            PremiumPunishments.getPlugin().getDatabase().execute("DELETE FROM bans WHERE uuid='" + player.getUniqueId() + "'");
+                            PremiumPunishments.getPlugin().getDatabase().execute("DELETE FROM " + PremiumPunishments.tablePrefix + "bans WHERE uuid='" + player.getUniqueId() + "'");
                             return;
                         }
                         player.kickPlayer(Placeholders.setBanPlaceholders(PremiumPunishments.getPlugin().getMessages().get("ban-message"), ban));

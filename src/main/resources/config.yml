@@ -1,3 +1,6 @@
+# Currently supported: en_us (US English) en_es (Spanish) ru (Russian)
+language: "en_us"
+
 database:
   database: "premiumpunishments"
   host: "localhost"
@@ -6,6 +9,8 @@ database:
   username: "root"
   password: "password"
 
+  table-prefix: "premiumpunishments_"
+
 messages:
   punishments:
     ban-message: "&cYou are temporarily banned from this server for &f%time%&c!\n\n&7Reason: &f%reason%\n&7Banned by: &f%admin%\n&7Ban ID: &f%id%"
@@ -13,23 +18,25 @@ messages:
 
     ban-broadcast-message: "&f%admin%&c has banned &f%player%&c for &f%reason%&c, and expires in &f%time%&c."
     perm-ban-broadcast-message: "&f%admin%&c has permanently banned &f%player%&c for &f%reason%&c."
+    unban-broadcast-message: "&f%admin%&c has unbanned &f%player%&c."
 
     mute-message: "&cYou are temporarily muted on this server for &f%time%&c!\n\n&7Reason: &f%reason%\n&7Muted by: &f%admin%\n\n&7Mute ID: &f%id%"
     perm-mute-message: "&cYou are permanently muted on this server!\n\n&7Reason: &f%reason%\n&7Muted by: &f%admin%\n&7Mute ID: &f%id%"
 
+    mute-broadcast-message: "&f%admin%&c has muted &f%player%&c for &f%reason%&c, and expires in &f%time%&c."
+    perm-mute-broadcast-message: "&f%admin&c has permanently muted &f%player%&c for &%f%reason%&c."
+    unmute-broadcast-message: "&f%admin%&c has unmuted &f%player%&c."
+
+    freeze-message: "&cYou have been frozen!\n&cJoin the teamspeak at &f<teamspeak>&c now!"
+
+    freeze-broadcast-message: "&f%admin%&c has frozen &f%player%&c."
+    unfreeze-broadcast-message: "&f%admin%&c has unfrozen &f%player%&c."
+
     kick-message: "&cYou have been kicked from this server!\n\n&7Reason: &f%reason%\n&7Kicked by: &f%admin%"
     warn-message: "&cYou have been warned by &f%admin%&c for &f%reason%"
 
-    freeze-message: "&cYou have been frozen!\n&cJoin the teamspeak at &f<teamspeak>&c now!"
-  commands:
-    # Invoked when a console or command block runs command that requires a player.
-    only-players: "%prefix%&cOnly players can execute this command!"
-    # Invoked when the executor does not have permission to execute the command.
-    no-permission: "&cYou don't have permission to execute this command!"
-    # Invoked when a command is not found.
-    unknown-command: "%prefix%&cCommand not found! Use /premiumpunishments help for more info."
-
-    unknown-player: "%prefix%&cCould not find player by the name of %s!"
+    warn-broadcast-message: "&f%admin%&c has warned &f%player%&c for &f%reason%&c."
+    kick-broadcast-message: "&f%admin%&c has kicked &f%player%&c for &f%reason%&c."
 
 settings:
   commands:

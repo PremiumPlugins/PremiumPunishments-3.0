@@ -53,7 +53,7 @@ public class FreezeListener implements Listener {
     private boolean isFrozen(Player player) {
         try {
             DatabaseHandler db = PremiumPunishments.getPlugin().getDatabase();
-            ResultSet set = db.query("SELECT * FROM frozen_players");
+            ResultSet set = db.query("SELECT * FROM " + PremiumPunishments.tablePrefix + "frozen_players");
             while (set.next()) {
                 if (set.getString("uuid").equals(player.getUniqueId().toString())) {
                     return true;

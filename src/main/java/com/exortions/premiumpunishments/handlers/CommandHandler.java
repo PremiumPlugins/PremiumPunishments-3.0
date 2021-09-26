@@ -14,6 +14,7 @@ import com.exortions.premiumpunishments.commands.core.notes.NoteCommand;
 import com.exortions.premiumpunishments.commands.core.warn.WarnCommand;
 import com.exortions.premiumpunishments.commands.miscellaneous.HelpCommand;
 import com.exortions.premiumpunishments.commands.miscellaneous.InfoCommand;
+import com.exortions.premiumpunishments.commands.miscellaneous.LogCommand;
 import com.exortions.premiumpunishments.commands.miscellaneous.ReloadCommand;
 import org.bukkit.ChatColor;
 
@@ -50,6 +51,7 @@ public class CommandHandler extends SubCommandHandler {
         subCommands.add(new HelpCommand());
         subCommands.add(new InfoCommand());
         subCommands.add(new BanCommand());
+        subCommands.add(new LogCommand());
 
         setSubcommands(subCommands);
     }

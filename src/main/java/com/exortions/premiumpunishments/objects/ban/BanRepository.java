@@ -14,7 +14,7 @@ public class BanRepository {
 
     public static Ban getBanByUuid(UUID uuid) {
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM bans WHERE uuid='" + uuid.toString() + "'");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "bans WHERE uuid='" + uuid.toString() + "'");
 
             if (set.next()) {
                 String username = set.getString("username");
@@ -30,7 +30,7 @@ public class BanRepository {
 
     public static Ban getBanByUuid(String uuid) {
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM bans WHERE uuid='" + uuid + "'");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "bans WHERE uuid='" + uuid + "'");
 
             if (set.next()) {
                 String username = set.getString("username");
@@ -46,7 +46,7 @@ public class BanRepository {
 
     public static Ban getBanById(int id) {
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM bans WHERE id='" + id + "'");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "bans WHERE id='" + id + "'");
 
             if (set.next()) {
                 String uuid = set.getString("uuid");
@@ -63,7 +63,7 @@ public class BanRepository {
     public static List<Ban> getPermanentBans() {
         List<Ban> bans = new ArrayList<>();
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM bans WHERE ban-type='perm'");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "bans WHERE ban-type='perm'");
 
             while (set.next()) {
                 String uuid = set.getString("uuid");
@@ -81,7 +81,7 @@ public class BanRepository {
     public static List<Ban> getBans() {
         List<Ban> bans = new ArrayList<>();
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM bans WHERE ban-type='ban'");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "bans WHERE ban-type='ban'");
 
             while (set.next()) {
                 String uuid = set.getString("uuid");
@@ -99,7 +99,7 @@ public class BanRepository {
     public static List<Ban> getAllBans() {
         List<Ban> bans = new ArrayList<>();
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM bans");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "bans");
 
             while (set.next()) {
                 String uuid = set.getString("uuid");
@@ -117,7 +117,7 @@ public class BanRepository {
     public static List<Ban> getBansByAdmin(String admin) {
         List<Ban> bans = new ArrayList<>();
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM bans WHERE admin='" + admin + "'");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "bans WHERE admin='" + admin + "'");
 
             while (set.next()) {
                 String uuid = set.getString("uuid");
@@ -134,7 +134,7 @@ public class BanRepository {
     public static List<Ban> getBansByAdmin(UUID admin) {
         List<Ban> bans = new ArrayList<>();
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM bans WHERE admin='" + admin.toString() + "'");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "bans WHERE admin='" + admin.toString() + "'");
 
             while (set.next()) {
                 String uuid = set.getString("uuid");
@@ -150,7 +150,7 @@ public class BanRepository {
 
     public static int getNextId() {
         try {
-            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT id FROM bans");
+            ResultSet set = PremiumPunishments.getPlugin().getDatabase().query("SELECT id FROM " + PremiumPunishments.tablePrefix + "bans");
 
             int id = 0;
 

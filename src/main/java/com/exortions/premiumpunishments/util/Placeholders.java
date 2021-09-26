@@ -21,20 +21,30 @@ public class Placeholders {
         return s.replaceAll("%reason%", reason).replaceAll("%admin%", admin);
     }
 
+    public static String setKickPlaceholders(String s, String reason, CommandSender sender, String player) {
+        String admin = sender.getName();
+        return s.replaceAll("%reason%", reason).replaceAll("%admin%", admin).replaceAll("%player%", player);
+    }
+
     public static String setWarnPlaceholders(String s, String reason, CommandSender sender) {
         String admin = sender.getName();
         return s.replaceAll("%reason%", reason).replaceAll("%admin%", admin);
     }
 
+    public static String setWarnPlaceholders(String s, String reason, CommandSender sender, String player) {
+        String admin = sender.getName();
+        return s.replaceAll("%reason%", reason).replaceAll("%admin%", admin).replaceAll("%player%", player);
+    }
+
     public static String setMutePlaceholders(String s, Mute mute) {
-        if (mute.getType() == MuteType.mute) return s.replaceAll("%reason%", mute.getReason()).replaceAll("%admin%", mute.getAdmin()).replaceAll("%time%", findTime(MinecraftPlayerRepository.getPlayerByUuid(mute.getUuid()).getBanexpirydate())).replaceAll("%id%", Integer.toString(mute.getId()));
+        if (mute.getType() == MuteType.mute) return s.replaceAll("%reason%", mute.getReason()).replaceAll("%admin%", mute.getAdmin()).replaceAll("%time%", findTime(MinecraftPlayerRepository.getPlayerByUuid(mute.getUuid()).getBanexpirydate())).replaceAll("%id%", Integer.toString(mute.getId())).replaceAll("%player%", mute.getUsername());
         else return s.replaceAll("%reason%", mute.getReason()).replaceAll("%admin%", mute.getAdmin()).replaceAll("%time%", "Never").replaceAll("%id%", Integer.toString(mute.getId()));
     }
 
     public static String setBanPlaceholders(String s, Ban ban) {
         System.out.println(ban);
-        if (ban.getType() == BanType.ban) return s.replaceAll("%reason%", ban.getReason()).replaceAll("%admin%", ban.getAdmin()).replaceAll("%time%", findTime(MinecraftPlayerRepository.getPlayerByUuid(ban.getUuid()).getBanexpirydate())).replaceAll("%id%", Integer.toString(ban.getId()));
-        else return s.replaceAll("%reason%", ban.getReason()).replaceAll("%admin%", ban.getAdmin()).replaceAll("%time%", "Never").replaceAll("%id%", Integer.toString(ban.getId()));
+        if (ban.getType() == BanType.ban) return s.replaceAll("%reason%", ban.getReason()).replaceAll("%admin%", ban.getAdmin()).replaceAll("%time%", findTime(MinecraftPlayerRepository.getPlayerByUuid(ban.getUuid()).getBanexpirydate())).replaceAll("%id%", Integer.toString(ban.getId())).replaceAll("%player%", ban.getUsername());
+        else return s.replaceAll("%reason%", ban.getReason()).replaceAll("%admin%", ban.getAdmin()).replaceAll("%time%", "Never").replaceAll("%id%", Integer.toString(ban.getId())).replaceAll("%player%", ban.getUsername());
     }
 
     public static String findTime(Timestamp timestamp) {

@@ -1,5 +1,6 @@
 package com.exortions.premiumpunishments.commands.core.notes;
 
+import com.exortions.premiumpunishments.PremiumPunishments;
 import com.exortions.premiumpunishments.objects.command.SubCommand;
 import com.exortions.premiumpunishments.util.MojangAPI;
 import org.bukkit.ChatColor;
@@ -25,7 +26,7 @@ public class ListCommand implements SubCommand {
                 }
                 UUID target = UUID.fromString(uuid);
 
-                ResultSet set = database().query("SELECT * FROM notes WHERE uuid='" + player.getUniqueId() + "' AND target='" + target + "'");
+                ResultSet set = database().query("SELECT * FROM " + PremiumPunishments.tablePrefix + "notes WHERE uuid='" + player.getUniqueId() + "' AND target='" + target + "'");
 
                 List<String> notes = new ArrayList<>();
 

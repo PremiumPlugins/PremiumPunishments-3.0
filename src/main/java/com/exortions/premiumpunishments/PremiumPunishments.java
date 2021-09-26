@@ -13,6 +13,7 @@ import com.exortions.premiumpunishments.listeners.PlayerChatListener;
 import com.exortions.premiumpunishments.listeners.PlayerJoinListener;
 import com.exortions.premiumpunishments.objects.settings.Settings;
 import com.exortions.premiumpunishments.util.DatabaseHandler;
+import com.exortions.premiumpunishments.util.lang.LanguageManager;
 import lombok.Getter;
 import lombok.Setter;
 import org.bstats.bukkit.Metrics;
@@ -35,7 +36,9 @@ public final class PremiumPunishments extends SpigotPlugin {
     @Getter @Setter
     private Configuration configuration;
     @Getter
-    public DatabaseHandler database;
+    private DatabaseHandler database;
+    @Getter
+    private LanguageManager manager;
 
     @Getter
     private HashMap<String, String> messages;
@@ -44,6 +47,8 @@ public final class PremiumPunishments extends SpigotPlugin {
     private HashMap<String, String> databaseInformation;
 
     public static HashMap<UUID, BukkitTask> frozenPlayers;
+
+    public static String tablePrefix;
 
     private long ms;
 
@@ -60,6 +65,7 @@ public final class PremiumPunishments extends SpigotPlugin {
         registerCommands();
 
         if (!loadConfiguration()) return; else loaded = true;
+        if (!loadLanguages()) return; else loaded = true;
         if (!loadMessages()) return; else loaded = true;
         if (!loadStorage()) return; else loaded = true;
         if (!loadData()) return; else loaded = true;
@@ -113,11 +119,29 @@ public final class PremiumPunishments extends SpigotPlugin {
 
         sendMessage(getPrefix() + "Settings:");
         sendMessage(getPrefix() + " - Ban IP addresses: " + Settings.BAN_IP_ADDRESSES);
-        sendMessage(getPrefix());
+        sendMessage(getPrefix() + "   ");
         sendMessage(getPrefix() + " - Disable movement (Freeze): " + Settings.FREEZE_DISABLE_MOVEMENT);
         sendMessage(getPrefix() + " - Disable interactions (Freeze): " + Settings.FREEZE_DISABLE_INTERACTIONS);
         sendMessage(getPrefix() + " - Disable chatting (Freeze): " + Settings.FREEZE_DISABLE_CHATTING);
         sendMessage(getPrefix() + " - Disabled commands (Freeze): " + Collections.singletonList(Settings.FREEZE_DISABLED_COMMANDS));
+
+        return true;
+    }
+
+    private boolean loadLanguages() {
+        sendMessage(getPrefix() + "Loading languages...");
+
+        String language = configuration.getString("language");
+
+        manager = new LanguageManager(language);
+
+        if (manager.getCurrentLanguage() == null) {
+            sendMessage(getPrefix() + ChatColor.RED + "Language is invalid! Valid languages: en_us");
+            Bukkit.getPluginManager().disablePlugin(this);
+            return false;
+        }
+
+        sendMessage(getPrefix() + " - Using language " + manager.getCurrentLanguage().getName());
 
         return true;
     }
@@ -127,27 +151,41 @@ public final class PremiumPunishments extends SpigotPlugin {
 
         messages = new HashMap<>();
 
-        messages.put("ban-message", ChatUtils.colorize(configuration.getString("messages.punishments.ban-message")));
-        messages.put("perm-ban-message", ChatUtils.colorize(configuration.getString("messages.punishments.perm-ban-message")));
+        addMessage("ban-message");
+        addMessage("perm-ban-message");
 
-        messages.put("ban-broadcast-message", ChatUtils.colorize(configuration.getString("messages.punishments.ban-broadcast-message")));
-        messages.put("perm-ban-broadcast-message", ChatUtils.colorize(configuration.getString("messages.punishments.perm-ban-broadcast-message")));
+        addMessage("ban-broadcast-message");
+        addMessage("perm-ban-broadcast-message");
+        addMessage("unban-broadcast-message");
 
-        messages.put("mute-message", ChatUtils.colorize(configuration.getString("messages.punishments.mute-message")));
-        messages.put("perm-mute-message", ChatUtils.colorize(configuration.getString("messages.punishments.perm-mute-message")));
+        addMessage("mute-message");
+        addMessage("perm-mute-message");
 
-        messages.put("kick-message", ChatUtils.colorize(configuration.getString("messages.punishments.kick-message")));
-        messages.put("warn-message", ChatUtils.colorize(configuration.getString("messages.punishments.warn-message")));
+        addMessage("mute-broadcast-message");
+        addMessage("perm-mute-broadcast-message");
+        addMessage("unmute-broadcast-message");
 
-        messages.put("freeze-message", ChatUtils.colorize(configuration.getString("messages.punishments.freeze-message")));
+        addMessage("freeze-message");
 
-        messages.put("only-players", ChatUtils.colorize(configuration.getString("messages.commands.only-players").replaceAll("%prefix%", getPrefix())));
-        messages.put("no-permission", ChatUtils.colorize(configuration.getString("messages.commands.no-permission").replaceAll("%prefix%", getPrefix())));
-        messages.put("unknown-command", ChatUtils.colorize(configuration.getString("messages.commands.unknown-command").replaceAll("%prefix%", getPrefix())));
+        addMessage("freeze-broadcast-message");
+        addMessage("unfreeze-broadcast-message");
 
-        messages.put("unknown-player", ChatUtils.colorize(configuration.getString("messages.commands.unknown-player").replaceAll("%prefix%", getPrefix())));
+        addMessage("kick-message");
+        addMessage("warn-message");
+
+        addMessage("warn-broadcast-message");
+        addMessage("kick-broadcast-message");
+
+        messages.put("only-players", ChatUtils.colorize(manager.getCurrentLanguage().get("only-players").replaceAll("%prefix%", getPrefix())));
+        messages.put("no-permission", ChatUtils.colorize(manager.getCurrentLanguage().get("no-permission").replaceAll("%prefix%", getPrefix())));
+        messages.put("unknown-command", ChatUtils.colorize(manager.getCurrentLanguage().get("unknown-command").replaceAll("%prefix%", getPrefix())));
+        messages.put("unknown-player", ChatUtils.colorize(manager.getCurrentLanguage().get("unknown-player").replaceAll("%prefix%", getPrefix())));
 
         return true;
+    }
+
+    private void addMessage(String message) {
+        messages.put(message, ChatUtils.colorize(configuration.getString("messages.punishments." + message)));
     }
 
     private boolean loadStorage() {
@@ -155,11 +193,12 @@ public final class PremiumPunishments extends SpigotPlugin {
 
         loadDatabaseInformation();
 
-        database = new DatabaseHandler(databaseInformation.get("database"), databaseInformation.get("host"), databaseInformation.get("port"), databaseInformation.get("username"), databaseInformation.get("password"));
+        database = new DatabaseHandler(databaseInformation.get("database"), databaseInformation.get("host"), databaseInformation.get("port"), databaseInformation.get("username"), databaseInformation.get("password"), databaseInformation.get("table-prefix"));
 
         sendMessage(getPrefix() + "Creating connection to database...");
         try {
             database.createConnection();
+            sendMessage(getPrefix() + " - Table prefix: " + databaseInformation.get("table-prefix"));
             sendMessage(getPrefix() + " - Successfully connected to database!");
         } catch (SQLException e) {
             sendMessage(getPrefix() + " - An error occurred while trying to connect to the database! Check the config.yml and restart your server.");
@@ -179,6 +218,8 @@ public final class PremiumPunishments extends SpigotPlugin {
 
         databaseInformation.put("username", configuration.getString("database.username"));
         databaseInformation.put("password", configuration.getString("database.password"));
+
+        databaseInformation.put("table-prefix", configuration.getString("database.table-prefix"));
     }
 
     private boolean loadData() {
@@ -192,6 +233,7 @@ public final class PremiumPunishments extends SpigotPlugin {
         database.createMutesTable();
         database.createNotesTable();
         database.createBansTable();
+        database.createLogsTable();
 
         return true;
     }
