@@ -35,7 +35,7 @@ public class WarnCommand implements SubCommand {
                     String reason = "";
                     int i = 0;
                     for (String s : args) {
-                        if (i > 1) reason = reason.concat(s + " ");
+                        if (i > 0) reason = reason.concat(s + " ");
                         i++;
                     }
                     reason = reason.substring(0, reason.length() - 1);
@@ -64,7 +64,7 @@ public class WarnCommand implements SubCommand {
                     String reason = "";
                     int i = 0;
                     for (String s : args) {
-                        if (i > 2) reason = reason.concat(s + " ");
+                        if (i > 1) reason = reason.concat(s + " ");
                         i++;
                     }
                     reason = reason.substring(0, reason.length() - 1);

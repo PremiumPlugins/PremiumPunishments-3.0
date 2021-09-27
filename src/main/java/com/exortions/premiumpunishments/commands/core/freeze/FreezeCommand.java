@@ -68,7 +68,7 @@ public class FreezeCommand implements SubCommand {
 
                 sender.sendMessage(prefix() + "Successfully froze " + target.getName() + "!");
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    if (player.hasPermission("premiumpunishments.staff-broadcasts")) player.sendMessage(messages().get("freeze-broadcast-message").replaceAll("%player%", args[1]).replaceAll("%admin%", sender.getName()));
+                    if (player.hasPermission("premiumpunishments.staff-broadcasts")) player.sendMessage((messages().get("freeze-broadcast-message") + ChatColor.WHITE + " [SILENT]").replaceAll("%player%", args[1]).replaceAll("%admin%", sender.getName()));
                 }
                 target.sendMessage(messages().get("freeze-message"));
                 if (!Settings.FREEZE_SPAM_MESSAGE) return;

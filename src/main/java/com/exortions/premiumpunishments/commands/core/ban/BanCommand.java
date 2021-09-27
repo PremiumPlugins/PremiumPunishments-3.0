@@ -5,7 +5,6 @@ import com.exortions.premiumpunishments.enums.BanType;
 import com.exortions.premiumpunishments.objects.ban.Ban;
 import com.exortions.premiumpunishments.objects.ban.BanRepository;
 import com.exortions.premiumpunishments.objects.command.Description;
-import com.exortions.premiumpunishments.objects.command.RequiresPlayer;
 import com.exortions.premiumpunishments.objects.command.SubCommand;
 import com.exortions.premiumpunishments.objects.command.Usage;
 import com.exortions.premiumpunishments.objects.minecraftplayer.MinecraftPlayer;
@@ -18,14 +17,12 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Usage(usage = "[-s] <player> <time> <reason>")
 @Description(description = "Ban a player with a custom duration and message. Banning a player will disconnect them from the server and display to them the custom message, as well as prevent them from re-connecting to the server until the duration has expired, or they have been manually unbanned. Banning also has the option to be silent only to staff.")

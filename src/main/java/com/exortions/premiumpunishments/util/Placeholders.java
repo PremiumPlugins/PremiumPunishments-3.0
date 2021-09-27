@@ -37,12 +37,11 @@ public class Placeholders {
     }
 
     public static String setMutePlaceholders(String s, Mute mute) {
-        if (mute.getType() == MuteType.mute) return s.replaceAll("%reason%", mute.getReason()).replaceAll("%admin%", mute.getAdmin()).replaceAll("%time%", findTime(MinecraftPlayerRepository.getPlayerByUuid(mute.getUuid()).getBanexpirydate())).replaceAll("%id%", Integer.toString(mute.getId())).replaceAll("%player%", mute.getUsername());
+        if (mute.getType() == MuteType.mute) return s.replaceAll("%reason%", mute.getReason()).replaceAll("%admin%", mute.getAdmin()).replaceAll("%time%", findTime(MinecraftPlayerRepository.getPlayerByUuid(mute.getUuid()).getMuteexpirydate())).replaceAll("%id%", Integer.toString(mute.getId())).replaceAll("%player%", mute.getUsername());
         else return s.replaceAll("%reason%", mute.getReason()).replaceAll("%admin%", mute.getAdmin()).replaceAll("%time%", "Never").replaceAll("%id%", Integer.toString(mute.getId()));
     }
 
     public static String setBanPlaceholders(String s, Ban ban) {
-        System.out.println(ban);
         if (ban.getType() == BanType.ban) return s.replaceAll("%reason%", ban.getReason()).replaceAll("%admin%", ban.getAdmin()).replaceAll("%time%", findTime(MinecraftPlayerRepository.getPlayerByUuid(ban.getUuid()).getBanexpirydate())).replaceAll("%id%", Integer.toString(ban.getId())).replaceAll("%player%", ban.getUsername());
         else return s.replaceAll("%reason%", ban.getReason()).replaceAll("%admin%", ban.getAdmin()).replaceAll("%time%", "Never").replaceAll("%id%", Integer.toString(ban.getId())).replaceAll("%player%", ban.getUsername());
     }
@@ -68,30 +67,32 @@ public class Placeholders {
         if (seconds > 0) diff = diff.concat(seconds + "s ");
 
         if (!(diff.length() < 1)) diff = diff.substring(0, diff.length()-1);
+        if (diff.isEmpty()) diff = diff.concat("0s");
 
         return diff;
     }
 
     public static long getTime(String s) {
+        long l = 0L;
         if (s.contains("s")) {
             s = s.replaceFirst("s", "");
-            return (Long.parseLong(s) * 1000L);
+            l =  (Long.parseLong(s) * 1000L);
         } else if (s.contains("m")) {
             s = s.replaceFirst("m", "");
-            return (Long.parseLong(s) * 60000L);
+            l =  (Long.parseLong(s) * 60000L);
         } else if (s.contains("h")) {
             s = s.replaceFirst("h", "");
-            return (Long.parseLong(s) * 3600000L);
+            l =  (Long.parseLong(s) * 3600000L);
         } else if (s.contains("d")) {
             s = s.replaceFirst("d", "");
-            return (Long.parseLong(s) * 86400000L);
+            l =  (Long.parseLong(s) * 86400000L);
         } else if (s.contains("y")) {
             s = s.replaceFirst("y", "");
-            return (Long.parseLong(s) * 31556952000L);
+            l =  (Long.parseLong(s) * 31556952000L);
         } else if (s.equals("-1")) {
-            return -1;
+            l =  -1;
         }
-        throw new NumberFormatException("Incorrect time data type! s,m,h,d,y and -1 are allowed.");
+        return l;
     }
 
 }

@@ -29,7 +29,7 @@ public class UnfreezeCommand implements SubCommand {
                     return;
                 }
 
-                database().execute("DELETE FROM `" + database().getDatabase() + "`.`frozen_players` WHERE uuid='" + target.getUniqueId() + "';");
+                database().execute("DELETE FROM `" + database().getDatabase() + "`.`" + PremiumPunishments.tablePrefix + "frozen_players` WHERE uuid='" + target.getUniqueId() + "';");
 
                 PremiumPunishments.frozenPlayers.get(target.getUniqueId()).cancel();
                 PremiumPunishments.frozenPlayers.remove(target.getUniqueId());
@@ -37,9 +37,7 @@ public class UnfreezeCommand implements SubCommand {
                 if (sender instanceof Player) LogManager.addLog((Player) sender, "Unfreeze", "None", target.getName(), "None");
 
                 sender.sendMessage(prefix() + "Successfully unfroze " + target.getName());
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.sendMessage(messages().get("unfreeze-broadcast-message").replaceAll("%admin%", sender.getName()).replaceAll("%player%", args[0]));
-                }
+                for (Player player : Bukkit.getOnlinePlayers()) player.sendMessage(messages().get("unfreeze-broadcast-message").replaceAll("%admin%", sender.getName()).replaceAll("%player%", args[0]));
             } else if (args.length == 2) {
                 Player target = Bukkit.getPlayer(args[1]);
                 if (target == null) {
@@ -52,7 +50,7 @@ public class UnfreezeCommand implements SubCommand {
                     return;
                 }
 
-                database().execute("DELETE FROM `" + database().getDatabase() + "`.`frozen_players` WHERE uuid='" + target.getUniqueId() + "';");
+                database().execute("DELETE FROM `" + database().getDatabase() + "`.`" + PremiumPunishments.tablePrefix + "frozen_players` WHERE uuid='" + target.getUniqueId() + "';");
 
                 PremiumPunishments.frozenPlayers.get(target.getUniqueId()).cancel();
                 PremiumPunishments.frozenPlayers.remove(target.getUniqueId());
@@ -60,9 +58,7 @@ public class UnfreezeCommand implements SubCommand {
                 if (sender instanceof Player) LogManager.addLog((Player) sender, "Unfreeze", "None", target.getName(), "None");
 
                 sender.sendMessage(prefix() + "Successfully unfroze " + target.getName());
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    if (player.hasPermission("premiumpunishments.staff-broadcasts")) player.sendMessage(messages().get("unfreeze-broadcast-message").replaceAll("%admin%", sender.getName()).replaceAll("%player%", args[1]));
-                }
+                for (Player player : Bukkit.getOnlinePlayers()) if (player.hasPermission("premiumpunishments.staff-broadcasts")) player.sendMessage((messages().get("unfreeze-broadcast-message") + ChatColor.WHITE + " [SILENT]").replaceAll("%admin%", sender.getName()).replaceAll("%player%", args[1]));
             } else Bukkit.dispatchCommand(sender, "premiumpunishments help unfreeze");
         } else Bukkit.dispatchCommand(sender, "premiumpunishments help unfreeze");
     }

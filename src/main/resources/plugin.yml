@@ -13,3 +13,5 @@ commands:
     description: Main command for the PremiumPunishments plugin.
     aliases:
       - pp
+  ban:
+  unban:

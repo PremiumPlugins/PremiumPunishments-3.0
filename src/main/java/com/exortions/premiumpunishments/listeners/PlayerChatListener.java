@@ -23,7 +23,7 @@ public class PlayerChatListener implements Listener {
             if (mute.getType() == MuteType.mute) {
                 if (mp.getMuteexpirydate().getTime() < System.currentTimeMillis()) {
                     mp.setMuted(false);
-                    PremiumPunishments.getPlugin().getDatabase().execute("DELETE FROM mutes WHERE uuid='" + e.getPlayer().getUniqueId() + "'");
+                    PremiumPunishments.getPlugin().getDatabase().execute("DELETE FROM " + PremiumPunishments.tablePrefix + "mutes WHERE uuid='" + e.getPlayer().getUniqueId() + "'");
                     return;
                 }
                 e.getPlayer().sendMessage(Placeholders.setMutePlaceholders(PremiumPunishments.getPlugin().getMessages().get("mute-message"), mute));
