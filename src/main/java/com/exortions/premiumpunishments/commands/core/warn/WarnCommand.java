@@ -47,9 +47,7 @@ public class WarnCommand implements SubCommand {
                     if (sender instanceof Player) LogManager.addLog((Player) sender, "Warn", reason, args[0], "None");
 
                     sender.sendMessage(prefix() + "Successfully warned " + target.getName() + " for " + reason + "!");
-                    for (Player player : Bukkit.getOnlinePlayers()) {
-                        player.sendMessage(Placeholders.setWarnPlaceholders(messages().get("warn-broadcast-message"), reason, sender, args[0]));
-                    }
+                    for (Player player : Bukkit.getOnlinePlayers()) player.sendMessage(Placeholders.setWarnPlaceholders(messages().get("warn-broadcast-message"), reason, sender, args[0]));
                 } else sender.sendMessage(messages().get("unknown-player").replaceAll("%s", args[0]));
             } else if (args.length >= 2) {
                 Player target = Bukkit.getPlayer(args[1]);
@@ -76,9 +74,7 @@ public class WarnCommand implements SubCommand {
                     if (sender instanceof Player) LogManager.addLog((Player) sender, "Warn", reason, args[1], "None");
 
                     sender.sendMessage(prefix() + "Successfully warned " + target.getName() + " for " + reason + "!");
-                    for (Player player : Bukkit.getOnlinePlayers()) {
-                        if (player.hasPermission("premiumpunishments.staff-broadcasts")) player.sendMessage(Placeholders.setWarnPlaceholders(messages().get("warn-broadcast-message"), reason, sender, args[1]));
-                    }
+                    for (Player player : Bukkit.getOnlinePlayers()) if (player.hasPermission("premiumpunishments.staff-broadcasts")) player.sendMessage(Placeholders.setWarnPlaceholders(messages().get("warn-broadcast-message") + ChatColor.WHITE + " [SILENT]", reason, sender, args[1]));
                 } else sender.sendMessage(messages().get("unknown-player").replaceAll("%s", args[1]));
             }
         } else Bukkit.dispatchCommand(sender, "premiumpunishments help warn");

@@ -19,4 +19,10 @@ public class MojangAPI {
         return null;
     }
 
+    public static String getUuidByNameException(String name) throws IOException {
+        URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + name);
+        InputStreamReader reader = new InputStreamReader(url.openStream());
+        return new JsonParser().parse(reader).getAsJsonObject().get("id").getAsString().replaceFirst("(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5");
+    }
+
 }

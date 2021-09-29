@@ -51,7 +51,7 @@ public class MuteCommand implements SubCommand {
                     }
                     reason = reason.substring(0, reason.length() - 1);
                     String time = args[1];
-                    mute(sender, target, reason, time);
+                    if (!mute(sender, target, reason, time)) return;
 
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         if (time.equals("-1"))
@@ -83,7 +83,8 @@ public class MuteCommand implements SubCommand {
                     }
                     reason = reason.substring(0, reason.length() - 1);
                     String time = args[2];
-                    mute(sender, target, reason, time);
+
+                    if (!mute(sender, target, reason, time)) return;
 
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         if (player.hasPermission("premiumpunishments.staff-broadcasts")) {
@@ -100,12 +101,12 @@ public class MuteCommand implements SubCommand {
         }
     }
 
-    private void mute(CommandSender sender, Player target, String reason, String time) {
+    private boolean mute(CommandSender sender, Player target, String reason, String time) {
         MinecraftPlayer mp = MinecraftPlayerRepository.getPlayerByUuid(target.getUniqueId());
         assert mp != null : "Player is somehow null!";
         if (mp.getMuted()) {
             sender.sendMessage(prefix() + ChatColor.RED + "That player is already muted! They will be unmuted at: " + mp.getMuteexpirydate().toString());
-            return;
+            return false;
         }
         mp.setMuted(true);
         if (!time.equals("-1")) {
@@ -119,6 +120,7 @@ public class MuteCommand implements SubCommand {
         if (sender instanceof Player) LogManager.addLog((Player) sender, "Mute", reason, target.getName(), time);
 
         sender.sendMessage(prefix() + "Successfully muted " + target.getName() + " for " + time + ".");
+        return true;
     }
 
 }

@@ -6,6 +6,7 @@ import com.exortions.premiumpunishments.util.MojangAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,8 +20,10 @@ public class ListCommand implements SubCommand {
     public void execute(Player player, String[] args) {
         if (args.length == 1) {
             try {
-                String uuid = MojangAPI.getUuidByName(args[0]);
-                if (uuid == null) {
+                String uuid;
+                try {
+                    uuid = MojangAPI.getUuidByNameException(args[0]);
+                } catch (IOException e) {
                     player.sendMessage(messages().get("unknown-player").replaceAll("%s", args[0]));
                     return;
                 }

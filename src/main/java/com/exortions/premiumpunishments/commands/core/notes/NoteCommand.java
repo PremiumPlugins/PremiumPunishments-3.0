@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RequiresPlayer
-@Usage(usage = {"add <player> <name>", "remove <player> <name>", "list <player>"})
+@Usage(usage = "<add|remove|list> <player> <name>")
 @Description(description = "Notes allow staff to make notes on different players. They can remove, add, and list notes they have on a player.")
 public class NoteCommand implements SubCommand {
 
@@ -24,8 +24,9 @@ public class NoteCommand implements SubCommand {
             for (String s : ls) {
                 str = str.concat(s + " ");
             }
-            str = str.substring(0, str.length()-1);
-            String[] args = str.split("\\s");
+            String[] args;
+            if (str.length() > 0) str = str.substring(0, str.length()-1);
+            if (str.isEmpty()) args = new String[0]; else args = str.split("\\s");
             switch (oldArgs[0]) {
                 case "add":
                     new AddCommand().execute(player, args);

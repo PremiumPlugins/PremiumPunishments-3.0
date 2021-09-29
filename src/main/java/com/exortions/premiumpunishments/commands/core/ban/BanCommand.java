@@ -21,19 +21,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 @Usage(usage = "[-s] <player> <time> <reason>")
 @Description(description = "Ban a player with a custom duration and message. Banning a player will disconnect them from the server and display to them the custom message, as well as prevent them from re-connecting to the server until the duration has expired, or they have been manually unbanned. Banning also has the option to be silent only to staff.")
 public class BanCommand implements SubCommand {
-
-    @Override
-    public List<String> tabcompletion() {
-        List<String> ls = new ArrayList<>();
-        for (Player player : Bukkit.getOnlinePlayers()) ls.add(player.getName());
-        return ls;
-    }
 
     @Override
     public void execute(CommandSender player, String[] args) {
@@ -112,7 +104,7 @@ public class BanCommand implements SubCommand {
 
                     ban(player, target, reason, time, mp);
 
-                    for (Player p : Bukkit.getOnlinePlayers()) sendHoverableText(target, p, false, time.equals("-1"), time, BanRepository.getBanByUuid(target.getUniqueId()));
+                    for (Player p : Bukkit.getOnlinePlayers()) sendHoverableText(target, p, false, time.equals("-1"), time, Objects.requireNonNull(BanRepository.getBanByUuid(target.getUniqueId())));
                 } else Bukkit.dispatchCommand(player, "premiumpunishments help ban");
             }
         } else Bukkit.dispatchCommand(player, "premiumpunishments help ban");
@@ -128,11 +120,11 @@ public class BanCommand implements SubCommand {
         if (!time.equals("-1")) {
             database().insertNewBan(target.getUniqueId().toString(), target.getName(), BanType.ban, reason, player.getName(), BanRepository.getNextId());
             mp.setBanexpirydate(new Timestamp(System.currentTimeMillis() + (Placeholders.getTime("" + time))));
-            target.kickPlayer(Placeholders.setBanPlaceholders(messages().get("ban-message"), BanRepository.getBanByUuid(target.getUniqueId())));
+            target.kickPlayer(Placeholders.setBanPlaceholders(messages().get("ban-message"), Objects.requireNonNull(BanRepository.getBanByUuid(target.getUniqueId()))));
         } else {
             database().insertNewBan(target.getUniqueId().toString(), target.getName(), BanType.perm, reason, player.getName(), BanRepository.getNextId());
             mp.setBanexpirydate(new Timestamp(System.currentTimeMillis()));
-            target.kickPlayer(Placeholders.setBanPlaceholders(messages().get("perm-ban-message"), BanRepository.getBanByUuid(target.getUniqueId())));
+            target.kickPlayer(Placeholders.setBanPlaceholders(messages().get("perm-ban-message"), Objects.requireNonNull(BanRepository.getBanByUuid(target.getUniqueId()))));
         }
 
         if (player instanceof Player) LogManager.addLog((Player) player, "Ban", reason, target.getName(), time);
@@ -142,10 +134,9 @@ public class BanCommand implements SubCommand {
 
     private void sendHoverableText(Player target, Player onlinePlayer, boolean silent, boolean perm, String time, Ban ban) {
         TextComponent text;
-        if (silent) text = new TextComponent(perm ? Placeholders.setBanPlaceholders(messages().get("perm-ban-broadcast-message") + ChatColor.WHITE + " [SILENT]", BanRepository.getBanByUuid(target.getUniqueId())) : Placeholders.setBanPlaceholders(messages().get("ban-broadcast-message") + ChatColor.WHITE + " [SILENT]", BanRepository.getBanByUuid(target.getUniqueId()))); else text = new TextComponent(perm ? Placeholders.setBanPlaceholders(messages().get("perm-ban-broadcast-message"), BanRepository.getBanByUuid(target.getUniqueId())) : Placeholders.setBanPlaceholders(messages().get("ban-broadcast-message"), BanRepository.getBanByUuid(target.getUniqueId())));
 
+        text = silent ? new TextComponent(perm ? Placeholders.setBanPlaceholders(messages().get("perm-ban-broadcast-message") + ChatColor.WHITE + " [SILENT]", BanRepository.getBanByUuid(target.getUniqueId())) : Placeholders.setBanPlaceholders(messages().get("ban-broadcast-message") + ChatColor.WHITE + " [SILENT]", BanRepository.getBanByUuid(target.getUniqueId()))) : new TextComponent(perm ? Placeholders.setBanPlaceholders(messages().get("perm-ban-broadcast-message"), Objects.requireNonNull(BanRepository.getBanByUuid(target.getUniqueId()))) : Placeholders.setBanPlaceholders(messages().get("ban-broadcast-message"), Objects.requireNonNull(BanRepository.getBanByUuid(target.getUniqueId()))));
         time = time.equals("-1") ? "Permanent Ban" : time;
-
         String slnt = silent ? "Yes" : "No";
 
         String hover = "";

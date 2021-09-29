@@ -7,6 +7,7 @@ import com.exortions.pluginutils.plugin.JavaVersion;
 import com.exortions.pluginutils.plugin.MinecraftVersion;
 import com.exortions.pluginutils.plugin.SpigotPlugin;
 import com.exortions.premiumpunishments.handlers.CommandHandler;
+import com.exortions.premiumpunishments.handlers.MainCommandHandler;
 import com.exortions.premiumpunishments.handlers.TabCompleteHandler;
 import com.exortions.premiumpunishments.listeners.FreezeListener;
 import com.exortions.premiumpunishments.listeners.PlayerChatListener;
@@ -14,6 +15,7 @@ import com.exortions.premiumpunishments.listeners.PlayerJoinListener;
 import com.exortions.premiumpunishments.listeners.PlayerQuitListener;
 import com.exortions.premiumpunishments.objects.settings.Settings;
 import com.exortions.premiumpunishments.util.DatabaseHandler;
+import com.exortions.premiumpunishments.util.UpdateChecker;
 import com.exortions.premiumpunishments.util.lang.LanguageManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,6 +53,8 @@ public final class PremiumPunishments extends SpigotPlugin {
 
     public static String tablePrefix;
 
+    public static List<String> mainCommands;
+
     private long ms;
 
     @Override
@@ -66,6 +70,7 @@ public final class PremiumPunishments extends SpigotPlugin {
         registerListeners();
         registerCommands();
 
+        if (!checkForUpdates()) return; else loaded = true;
         if (!loadConfiguration()) return; else loaded = true;
         if (!loadLanguages()) return; else loaded = true;
         if (!loadMessages()) return; else loaded = true;
@@ -103,6 +108,59 @@ public final class PremiumPunishments extends SpigotPlugin {
         commandHandler = new CommandHandler();
         pp.setExecutor(commandHandler);
         pp.setTabCompleter(new TabCompleteHandler());
+
+        // Register non-subcommands
+
+        mainCommands = new ArrayList<>();
+
+        mainCommands.add("ban");
+        mainCommands.add("unban");
+        mainCommands.add("mute");
+        mainCommands.add("unmute");
+        mainCommands.add("freeze");
+        mainCommands.add("unfreeze");
+        mainCommands.add("kick");
+        mainCommands.add("warn");
+        mainCommands.add("note");
+
+        getCommand("ban").setExecutor(new MainCommandHandler());
+        getCommand("ban").setTabCompleter(new TabCompleteHandler());
+        getCommand("unban").setExecutor(new MainCommandHandler());
+        getCommand("unban").setTabCompleter(new TabCompleteHandler());
+
+        getCommand("mute").setExecutor(new MainCommandHandler());
+        getCommand("mute").setTabCompleter(new TabCompleteHandler());
+        getCommand("unmute").setExecutor(new MainCommandHandler());
+        getCommand("unmute").setTabCompleter(new TabCompleteHandler());
+
+        getCommand("freeze").setExecutor(new MainCommandHandler());
+        getCommand("freeze").setTabCompleter(new TabCompleteHandler());
+        getCommand("unfreeze").setExecutor(new MainCommandHandler());
+        getCommand("unfreeze").setTabCompleter(new TabCompleteHandler());
+
+        getCommand("freeze").setExecutor(new MainCommandHandler());
+        getCommand("freeze").setTabCompleter(new TabCompleteHandler());
+        getCommand("unfreeze").setExecutor(new MainCommandHandler());
+        getCommand("unfreeze").setTabCompleter(new TabCompleteHandler());
+
+        getCommand("kick").setExecutor(new MainCommandHandler());
+        getCommand("kick").setTabCompleter(new TabCompleteHandler());
+        getCommand("warn").setExecutor(new MainCommandHandler());
+        getCommand("warn").setTabCompleter(new TabCompleteHandler());
+        getCommand("note").setExecutor(new MainCommandHandler());
+        getCommand("note").setTabCompleter(new TabCompleteHandler());
+    }
+
+    private boolean checkForUpdates() {
+        new UpdateChecker(this, 96520).getLatestVersion(version -> {
+            if (this.getPluginVersion().equals(version)) {
+                sendMessage(getPrefix() + "Plugin is up to date. (Version " + version + ")");
+            } else {
+                sendMessage(getPrefix() + "You are running an out-of date version!");
+                sendMessage(getPrefix() + "Current version: " + getPluginVersion() + ", latest version: " + version);
+            }
+        });
+        return true;
     }
 
     private boolean loadConfiguration() {
@@ -119,7 +177,8 @@ public final class PremiumPunishments extends SpigotPlugin {
                 configuration.getBoolean("settings.commands.freeze.disable-chatting"),
                 configuration.getStringList("settings.commands.freeze.disabled-commands"),
                 configuration.getBoolean("settings.commands.freeze.spam-message"),
-                configuration.getInt("settings.commands.freeze.spam-message-delay"));
+                configuration.getInt("settings.commands.freeze.spam-message-delay")
+        );
 
         sendMessage(getPrefix() + "Settings:");
         sendMessage(getPrefix() + " - Hoverable text on broadcast: " + Settings.BROADCASTS_HOVERABLE_TEXT);

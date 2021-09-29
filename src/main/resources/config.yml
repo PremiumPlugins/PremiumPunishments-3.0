@@ -1,57 +1,70 @@
 # Currently supported: en_us (US English) en_es (Spanish) ru (Russian)
 language: "en_us"
 
+# Below is the database information that PremiumPunishments uses to connect to your database.
 database:
-  database: "premiumpunishments"
-  host: "localhost"
-  port: "3306"
+  database: "premiumpunishments" # The name of the database, typically the username of the database.
+  host: "localhost" # The IP Address of the database
+  port: "3306" # The port of the database, normally this should be 3306.
 
-  username: "root"
-  password: "password"
+  username: "premiumpunishments" # The username for the database
+  password: "password" # The password for the root user of the database.
 
-  table-prefix: "premiumpunishments_"
+  table-prefix: "premiumpunishments_" # The table prefix for the database. NOTE: When changing this, all stats will be wiped unless set back to previous table prefix.
 
+# Typical placeholders:
+# %admin%: The username of the staff member who conducted the punishment on the target.
+# %player%: The target's username for the punishment.
+# %time%: The time remaining for the punishment.
+# %reason%: The reason for the punishment.
+# %id%: The punishment ID, only for bans and mutes.
 messages:
   punishments:
-    ban-message: "&cYou are temporarily banned from this server for &f%time%&c!\n\n&7Reason: &f%reason%\n&7Banned by: &f%admin%\n&7Ban ID: &f%id%"
-    perm-ban-message: "&cYou are permanently banned from this server!\n\n&7Reason: &f%reason%\n&7Banned by: &f%admin%\n&7Ban ID: &f%id%"
+    ban-message: "&cYou are temporarily banned from this server for &f%time%&c!\n\n&7Reason: &f%reason%\n&7Banned by: &f%admin%\n&7Ban ID: &f%id%" # The message that is shown to the player after they have been temporarily banned
+    perm-ban-message: "&cYou are permanently banned from this server!\n\n&7Reason: &f%reason%\n&7Banned by: &f%admin%\n&7Ban ID: &f%id%" # The message that is shown to the player after they have been permanently banned %time% will be Never here.
 
-    ban-broadcast-message: "&f%admin%&c has banned &f%player%&c for &f%reason%&c, and expires in &f%time%&c."
-    perm-ban-broadcast-message: "&f%admin%&c has permanently banned &f%player%&c for &f%reason%&c."
-    unban-broadcast-message: "&f%admin%&c has unbanned &f%player%&c."
+    ban-broadcast-message: "&f%admin%&c has banned &f%player%&c for &f%reason%&c, and expires in &f%time%&c." # The message broadcast to the server when a player is temporarily banned if the ban was is silent.
+    perm-ban-broadcast-message: "&f%admin%&c has permanently banned &f%player%&c for &f%reason%&c." # The message broadcast to the server when a player is permanently banned if the ban was is silent.
+    unban-broadcast-message: "&f%admin%&c has unbanned &f%player%&c." # The message broadcast to the server when a player is unbanned if the unban is not silent.
 
-    mute-message: "&cYou are temporarily muted on this server for &f%time%&c!\n\n&7Reason: &f%reason%\n&7Muted by: &f%admin%\n\n&7Mute ID: &f%id%"
-    perm-mute-message: "&cYou are permanently muted on this server!\n\n&7Reason: &f%reason%\n&7Muted by: &f%admin%\n&7Mute ID: &f%id%"
+    mute-message: "&cYou are temporarily muted on this server for &f%time%&c!\n\n&7Reason: &f%reason%\n&7Muted by: &f%admin%\n\n&7Mute ID: &f%id%" # The message sent to a player after they attempt to chat while temporarily muted.
+    perm-mute-message: "&cYou are permanently muted on this server!\n\n&7Reason: &f%reason%\n&7Muted by: &f%admin%\n&7Mute ID: &f%id%" # The message sent to a player after they attempt to chat while permanently muted.
 
-    mute-broadcast-message: "&f%admin%&c has muted &f%player%&c for &f%reason%&c, and expires in &f%time%&c."
-    perm-mute-broadcast-message: "&f%admin&c has permanently muted &f%player%&c for &%f%reason%&c."
-    unmute-broadcast-message: "&f%admin%&c has unmuted &f%player%&c."
+    mute-broadcast-message: "&f%admin%&c has muted &f%player%&c for &f%reason%&c, and expires in &f%time%&c." # The message broadcast to the server when a player is temporarily muted if the mute is not silent.
+    perm-mute-broadcast-message: "&f%admin&c has permanently muted &f%player%&c for &%f%reason%&c." # The message broadcast to the server when a player is permanently muted if the mute is not silent.
+    unmute-broadcast-message: "&f%admin%&c has unmuted &f%player%&c." # The message broadcast to the server when a player is unmuted if the unmute is not silent.
 
-    freeze-message: "&cYou have been frozen!\n&cJoin the teamspeak at &f<teamspeak>&c now!"
+    freeze-message: "&cYou have been frozen!\n&cJoin the teamspeak at &f<teamspeak>&c now!" # The message sent to a player when they have been frozen.
 
-    freeze-broadcast-message: "&f%admin%&c has frozen &f%player%&c."
-    unfreeze-broadcast-message: "&f%admin%&c has unfrozen &f%player%&c."
+    freeze-broadcast-message: "&f%admin%&c has frozen &f%player%&c." # The message broadcast to the server when a player is frozen if the freeze is not silent.
+    unfreeze-broadcast-message: "&f%admin%&c has unfrozen &f%player%&c." # The message broadcast to the server when a player is unfrozen if the unfreeze is not silent.
 
-    kick-message: "&cYou have been kicked from this server!\n\n&7Reason: &f%reason%\n&7Kicked by: &f%admin%"
-    warn-message: "&cYou have been warned by &f%admin%&c for &f%reason%"
+    kick-message: "&cYou have been kicked from this server!\n\n&7Reason: &f%reason%\n&7Kicked by: &f%admin%" # The message displayed to a player when they are kicked from the server.
+    warn-message: "&cYou have been warned by &f%admin%&c for &f%reason%" # The message sent to a player when they are warned.
 
-    warn-broadcast-message: "&f%admin%&c has warned &f%player%&c for &f%reason%&c."
-    kick-broadcast-message: "&f%admin%&c has kicked &f%player%&c for &f%reason%&c."
+    kick-broadcast-message: "&f%admin%&c has kicked &f%player%&c for &f%reason%&c." # The message broadcast to the server when a player is kicked if the kick is not silent.
+    warn-broadcast-message: "&f%admin%&c has warned &f%player%&c for &f%reason%&c." # The message broadcast to the server when a player is warned if the warn is not silent.
 
+# Settings for PremiumPunishments
 settings:
   broadcasts:
-    hoverable-text: true
+    hoverable-text: true # If hoverable text with information of a punishment is shown when a punishment is broadcast.
   commands:
     ban:
-      ip-ban: true
+      ip-ban: true # If IP addresses are banned when a player on that IP address is banned.
     freeze:
-      disable-movement: true
+      disable-movement: true # If movement is disabled when a player is frozen.
 
-      disable-interactions: true
+      disable-interactions: true  # If breaking blocks, placing blocks, etc. is disabled when a player is frozen.
 
-      disable-chatting: true
-      disabled-commands:
+      disable-chatting: false # If a player is blocked from chatting while frozen.
+      disabled-commands: # Commands that are disabled when a player is frozen.
         - "help"
 
-      spam-message: true
-      spam-message-delay: 10 # Every half a second
+      spam-message: true # If the freeze-message is spammed to the user while frozen.
+      spam-message-delay: 10 # The delay for the spam, default is every half a second
+
+warns:
+  on-warn:
+    enabled: true # If this functionality is enabled.
+    3: "premiumpunishments mute %player% 1h Exceeded the limit of three warns." # The command executed by the console if a player exceeds three warns.

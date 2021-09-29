@@ -17,8 +17,8 @@ public class InfoCommand implements SubCommand {
     public void execute(CommandSender sender, String[] args) {
         String prefix = PremiumPunishments.getPrefix();
         String message = prefix + ChatColor.WHITE + "Running " + ChatColor.RED + "PremiumPunishments v" + PremiumPunishments.getPlugin().getPluginVersion() + ChatColor.WHITE + ".";
-        message = message.concat("\n" + ChatColor.RED + " > " + ChatColor.WHITE + "Spigot: https://www.spigotmc.org/");
-        message = message.concat("\n" + ChatColor.RED + " > " + ChatColor.WHITE + "Code: https://www.github.com/Exortions/PremiumPunishments\n ");
+        message = message.concat("\n" + ChatColor.RED + " > " + ChatColor.WHITE + "Spigot: https://www.spigotmc.org/resources/premium-punishments.96520/");
+        message = message.concat("\n" + ChatColor.RED + " > " + ChatColor.WHITE + "Source code: https://www.github.com/PremiumPlugins/PremiumPunishments-3.0\n ");
         message = message.concat("\n" + ChatColor.RED + " > " + ChatColor.WHITE + "Created and developed by Exortions");
         message = message.concat("\n" + ChatColor.RED + " > " + ChatColor.WHITE + " - GitHub: https://www.github.com/Exortions");
         message = message.concat("\n" + ChatColor.RED + " > " + ChatColor.WHITE + " - Discord: Exortions#0001");

@@ -1,5 +1,6 @@
 package com.exortions.premiumpunishments.commands.core.notes;
 
+import com.exortions.premiumpunishments.PremiumPunishments;
 import com.exortions.premiumpunishments.objects.command.SubCommand;
 import com.exortions.premiumpunishments.util.MojangAPI;
 import org.bukkit.entity.Player;
@@ -18,7 +19,7 @@ public class RemoveCommand implements SubCommand {
             }
             name = name.substring(0, name.length()-1);
 
-            database().execute("DELETE FROM `" + database().getDatabase() + "`.`notes` WHERE uuid='" + player.getUniqueId() + "' AND name='" + name + "' AND target='" + MojangAPI.getUuidByName(target) + "';");
+            database().execute("DELETE FROM `" + database().getDatabase() + "`.`" + PremiumPunishments.tablePrefix + "notes` WHERE uuid='" + player.getUniqueId() + "' AND name='" + name + "' AND target='" + MojangAPI.getUuidByName(target) + "';");
 
             player.sendMessage(prefix() + "Successfully removed note '" + name + "' from " + target + "!");
         } else player.performCommand("premiumpunishments help note");
